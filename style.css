@@ -1,0 +1,28 @@
+body{
+	background-color: #cccccc;
+	font-family: 'Titillium Web', sans-serif;
+	letter-spacing: 0.2vw;
+	font-size: 2vw;
+	padding: 0;
+	margin: 0;
+}
+
+/*remove focus outline*/
+input:focus, button:focus, .btn:focus{
+	outline: none;
+	color: #000000;
+	box-shadow: none;
+    filter: invert(70%);
+}
+
+/*set font for headers and remove padding from bootstrap*/
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: 'Dosis', sans-serif;
+	letter-spacing: 0.35vw;
+	font-size: 7vw;
+	margin: 0;
+}
