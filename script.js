@@ -70,7 +70,12 @@ function NEO() {
       /*tomorrow loop*/
       for (var i =0; i < numTmr; i++){   
             var dayTime = 'Today, 12:04' //change variable to either Today or Tmrrw, time based each entry
-            addString += '<div class="mb-2 px-4 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">' + dayTime + ' UT</h4> <a href="http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=3005973" target="_blank" class="neoName"><b>1995 CR</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>0.2</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>45</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>68</b> MM km<p> </div> </div> </div>'
+            var link = 'http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=3005973' //nasa_jpl_url
+            var name = '1995 CR' //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
+            var dia = '0.2' //Get reading in kilometers (average between min and max). 1 d.p. if less than 10. 0 d.p if more than 10
+            var vel = '45' //relative_velocity. get km/s reading. 0 d.p.
+            var dis = '68' //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
+            addString += '<div class="mb-2 px-4 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">' + dayTime + ' UT</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>68</b> MM km<p> </div> </div> </div>'
       }
 
 
