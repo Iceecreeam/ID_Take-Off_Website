@@ -41,3 +41,14 @@ h6{
 .tile:not(#main){
 	background-color: rgb(238, 238, 238, 0.5);
 }
+
+.neoName, .neoInfoRight>div>p>b{
+	font-size: 4vw;
+	line-height: 3vw;
+}
+.neoDateTime, .neoName{
+	margin:0;
+	line-height: 3vw;
+}
+
+
