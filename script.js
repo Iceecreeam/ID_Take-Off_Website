@@ -9,15 +9,18 @@ function picOfDay() {
 
          /*modify json for use*/
          console.log(data)
-
+      
          if(data["media_type"] == "video"){
             
             $("#photoDay>p.desc").append('<iframe class="col-12 pt-2 dayvid" src="" frameBorder="0"></iframe>')
             $(".dayvid").attr("src",data["url"])
          }
          else if (data["media_type"] == "image"){
-            $("#photoDay>p.desc").append('<img class="col-12" src="" alt="photoOfDay"</img>')
-            $("#photoDay>img").attr("src",data["url"])
+            $("#photoDay>p.desc").append('<img class="col-12 daypic" src="" alt="photoOfDay">')
+            $(".daypic").attr("src",data["url"])
+         }
+         else{
+            $("#photoDay>p.desc").append('It seems like this media type is unsupported.')
          }
          
          let newDate = data["date"]
