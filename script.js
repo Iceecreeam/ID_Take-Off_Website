@@ -9,11 +9,22 @@ function picOfDay() {
 
          /*modify json for use*/
          console.log(data)
-         $("#photoDay>img").attr("src",data["url"])
+
+         if(data["media_type"] == "video"){
+            
+            $("#photoDay>p.desc").append('<iframe class="col-12 pt-2 dayvid" src="" frameBorder="0"></iframe>')
+            $(".dayvid").attr("src",data["url"])
+         }
+         else if (data["media_type"] == "image"){
+            $("#photoDay>p.desc").append('<img class="col-12" src="" alt="photoOfDay"</img>')
+            $("#photoDay>img").attr("src",data["url"])
+         }
+         
          let newDate = data["date"]
          $("#date").text(newDate)
-         $(".imgTit").text(data["title"])
+         $(".imgTit>b").text(data["title"])
          $("#explain").text(data["explanation"])
+         $("#copyright").text(data["copyright"])
          })
 
 }
