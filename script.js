@@ -24,7 +24,11 @@ function picOfDay() {
          }
          
          let newDate = data["date"]
-         $("#date").text(newDate)
+         const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(newDate);
+         const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(newDate);
+         const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(newDate);
+         var d = `${da}-${mo}-${ye}`
+         $("#date").text(d)
          $(".imgTit>b").text(data["title"])
          $("#explain").text(data["explanation"])
          $("#copyright").text(data["copyright"])
@@ -56,6 +60,9 @@ function NEO() {
 
       /*check if JSON key with today's date has more than 4 children (youll get it when you see the console).
       if it has less than 4, change numTdy to the number of children*/
+      if (data["2021-02-01"].length > 4){
+            console.log("test");
+      } 
 
       /*check if JSON key with tomorrow's date has more than 4 children (youll get it when you see the console).
       if it has less than 4, change numTmr to the number of children*/
