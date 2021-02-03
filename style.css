@@ -63,3 +63,18 @@ iframe {
     width: 100vw; 
     height: 25vw; 
 }
+
+/*news*/
+
+.tit {
+	margin: auto 0;
+	line-height: 2.7vw;
+	font-size: 2vw
+}
+
+.art>span>img {
+	border-radius: 50%;
+	width: 9.5vw;
+	height: 9.5vw;
+	object-fit: cover
+}
