@@ -52,11 +52,13 @@ function NEO() {
 
       console.log(data) /*shows json data */
 
-      /*check if JSON key with today's date has more than 4 children (youll get it when you see the console).
-      if it has less than 4, change numTdy to the number of children*/
-
-      /*check if JSON key with tomorrow's date has more than 4 children (youll get it when you see the console).
-      if it has less than 4, change numTmr to the number of children*/
+      if (data[startDate].length<4){ 
+            numTdy = data[startDate].length;
+          }
+      if (data[endDate].length<4){ 
+         numTmr = data[endDate].length;
+      }
+            
 
       var addString = "" /*string that well add to the html code */
 
