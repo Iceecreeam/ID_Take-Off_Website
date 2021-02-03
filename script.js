@@ -20,7 +20,7 @@ function picOfDay() {
             $("#photoDay>img").attr("src",data["url"])
          }
          
-         let newDate = data["date"]
+         let newDate = new Date(data["date"])
          const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(newDate);
          const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(newDate);
          const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(newDate);
@@ -57,12 +57,18 @@ function NEO() {
 
       /*check if JSON key with today's date has more than 4 children (youll get it when you see the console).
       if it has less than 4, change numTdy to the number of children*/
-      if (data["2021-02-01"].length > 4){
-            console.log("test");
+      if (data[startDate].length < 4){
+            numTdy = data[startDate].length;
+            
       } 
+
+
 
       /*check if JSON key with tomorrow's date has more than 4 children (youll get it when you see the console).
       if it has less than 4, change numTmr to the number of children*/
+      if (data[endDate].length < 4){
+            numTdy = data[endDate].length
+      }
 
       var addString = "" /*string that well add to the html code */
 
@@ -81,23 +87,34 @@ function NEO() {
 
       /*today loop*/
       for (var i =0; i < numTdy; i++){   
+
             var dayTime = 'Today, 12:04' //change variable to either Today or Tmrrw, time based each entry
-            var link = 'http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=3005973' //nasa_jpl_url
-            var name = '1995 CR' //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
-            var dia = '0.2' //Get reading in kilometers (average between min and max). 1 d.p. if less than 10. 0 d.p if more than 10
-            var vel = '45' //relative_velocity. get km/s reading. 0 d.p.
-            var dis = '68' //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
+            
+            var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
+            var name = data[startDate][i]["name"] //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
+            var diamin = data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"]
+            var diamax = data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_max"]
+            
+            var dia = Math.round(((diamax+diamin)/2),5)//Get reading in kilometers (average between min and max). 1 d.p. if less than 10. 0 d.p if more than 10
+            var vel1 = Math.round(data[startDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"],0)
+            var vel = vel1 //relative_velocity. get km/s reading. 0 d.p.
+            var discal = data[startDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
+            var dis = Math.round(discal,2) //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
             addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">' + dayTime + ' UT</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>68</b> MM km<p> </div> </div> </div>'
       }
 
       /*tomorrow loop*/
       for (var i =0; i < numTmr; i++){   
             var dayTime = 'Today, 12:04' //change variable to either Today or Tmrrw, time based each entry
-            var link = 'http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=3005973' //nasa_jpl_url
-            var name = '1995 CR' //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
-            var dia = '0.2' //Get reading in kilometers (average between min and max). 1 d.p. if less than 10. 0 d.p if more than 10
-            var vel = '45' //relative_velocity. get km/s reading. 0 d.p.
-            var dis = '68' //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
+            var link = data[endDate][i]["nasa_jpl_url"]  //nasa_jpl_url
+            var name = data[endDate][i]["name"] //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
+            var diamin = data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"]
+            var diamax = data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_max"]
+            var avgdia = Math.round(((diamax+diamin)/2),2)
+            var dia = avgdia
+            var vel = Math.round(data[endDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"],0) //relative_velocity. get km/s reading. 0 d.p.
+            var discal = data[endDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
+            var dis = Math.round(discal,2) //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
             addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">' + dayTime + ' UT</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>68</b> MM km<p> </div> </div> </div>'
       }
 
