@@ -10,7 +10,12 @@ function picOfDay() {
          /*modify json for use*/
          console.log(data)
          $("#photoDay>img").attr("src",data["url"])
+         let newDate = data["date"]
+         $("#date").text(newDate)
+         $(".imgTit").text(data["title"])
+         $("#explain").text(data["explanation"])
          })
+
 }
 
 
