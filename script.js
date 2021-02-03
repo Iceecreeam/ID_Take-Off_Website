@@ -24,7 +24,7 @@ function picOfDay() {
          }
          
          $(".imgTit>b").text(data["title"])
-         $("#explain").text(data["explanation"])
+         $("#explain").texts(data["explanation"])
          $("#copyright").text(data["copyright"])
          })
 
