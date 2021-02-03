@@ -114,14 +114,38 @@
             </div>
 
 
-
-            <div class="p-3 text-center justify-content-center tile">
+            <!--random cool thing-->
+            <div class="p-3 text-center d-flex flex-wrap justify-content-center tile" id ="cool">
                <h1 class="tiletit">Something Cool?</h1>
                <p class="desc">Take a gander at our cool astronomy-related randomiser</p>
-               <audio controls>
-                  <source src="http://images-assets.nasa.gov/audio/KSC-STS-131SSTA_01/KSC-STS-131SSTA_01~128k.mp3" type="audio/mpeg">
-                  Your browser does not support the audio element.
-               </audio>
+               
+               <div class="col-10 mb-4 p-0 input-group">
+                  <input type="text" class="form-control coolKey" placeholder="Enter a keyword!" aria-label="Text input with dropdown button">
+                  <div class="input-group-append">
+                  <button class="btn btn-default bg-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Surprise me
+                  </button>
+                  <div class="text-center dropdown-menu medRop">
+                     <span class="dropdown-item dropMed">Image</span><span class="dropdown-item dropMed">Audio</b></span><span class="dropdown-item dropMed">Surprise me</span>
+                  </div>
+                  </div>
+               </div>
+
+               <div class="col-10 p-2 justify-content-center card" style="width: 18rem;">
+                  <!--<img class="d-inline p-0 " src="https://apod.nasa.gov/apod/image/2102/MeteorStreak_Kuszaj_1080.jpg" alt="Card image cap">
+                  --><div class="p-1 card-body">
+                     <div class="p-2 bg-secondary card-img-top">
+                        <audio class="col-12 p-0 mt-1" controls>
+                           <source src="http://images-assets.nasa.gov/audio/KSC-STS-131SSTA_01/KSC-STS-131SSTA_01~128k.mp3" type="audio/mpeg">
+                           Your browser does not support the audio element.
+                        </audio>
+                     </div>
+                    <h5 class="m-0 card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  </div>
+                </div>
+
+
             </div>
 
          </div>

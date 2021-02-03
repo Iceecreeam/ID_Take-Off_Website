@@ -64,7 +64,7 @@ function NEO() {
             var dia = '0.2' //Get reading in kilometers (average between min and max). 1 d.p. if less than 10. 0 d.p if more than 10
             var vel = '45' //relative_velocity. get km/s reading. 0 d.p.
             var dis = '68' //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
-            addString += '<div class="mb-2 px-4 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">' + dayTime + ' UT</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>68</b> MM km<p> </div> </div> </div>'
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">' + dayTime + ' UT</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>68</b> MM km<p> </div> </div> </div>'
       }
 
       /*tomorrow loop*/
@@ -75,10 +75,16 @@ function NEO() {
             var dia = '0.2' //Get reading in kilometers (average between min and max). 1 d.p. if less than 10. 0 d.p if more than 10
             var vel = '45' //relative_velocity. get km/s reading. 0 d.p.
             var dis = '68' //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
-            addString += '<div class="mb-2 px-4 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">' + dayTime + ' UT</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>68</b> MM km<p> </div> </div> </div>'
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">' + dayTime + ' UT</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>68</b> MM km<p> </div> </div> </div>'
       }
-
 
       $("#neo>p").append(addString)
       })
 }
+
+
+
+/*change innerhtml of drowpdown button to selected country*/
+$(document).on("click", ".dropMed" , function() {
+      ($(this).parent().siblings("button")).text($(this).text())
+   })

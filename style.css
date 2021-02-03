@@ -8,12 +8,14 @@ body{
 }
 
 /*remove focus outline*/
-input:focus, button:focus, .btn:focus{
+input:focus, button:focus, .btn:focus, textarea:focus, select:focus, audio:focus, .coolKey:focus{
 	outline: none;
+	border: 0;
 	color: #000000;
 	box-shadow: none;
     filter: invert(70%);
 }
+
 
 /*set font for headers and remove padding from bootstrap*/
 
@@ -31,6 +33,11 @@ h5,
 h6{
 	font-size: 2.1vw;
 	line-height: 3.8vw;
+}
+
+.dropMed, .dropdown-toggle, .coolKey{
+	font-size: 1.5vw;
+	line-height: 1.7vw;
 }
 
 .tile{
