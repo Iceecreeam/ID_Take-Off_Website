@@ -46,11 +46,9 @@ function NEO() {
       var mm = String(tmr.getMonth() + 1).padStart(2, '0'); //January is 0!
       var yyyy = tmr.getFullYear();
       tmr = `${yyyy}-${mm}-${dd}`;
-      document.write(today);
       
       var startDate = today /*get todays date*/
       var endDate = tmr /*get tomorrow's date*/
-      console.log(startDate)
 
 
       fetch("https://api.nasa.gov/neo/rest/v1/feed?start_date=" + startDate + "&end_date=" + endDate + "&api_key=0kDrOBtIYM2fhZoVrtf80AaSIzg4Tb7PPSeJ1bfu")
@@ -88,8 +86,8 @@ function NEO() {
             if (dia < 1){
                   dia = dia.toFixed(2).toString().substring(1)
             }
-            if(dia >= 1){
-                  dia.toFixed(0)
+            if(parseFloat(dia) >= 1){
+                  dia = parseFloat(dia).toFixed(0)
             }
             var vel1 = Math.round(data[startDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"],0)
             var vel = vel1 //relative_velocity. get km/s reading. 0 d.p.
@@ -110,15 +108,15 @@ function NEO() {
             if (dia < 1){
                   dia = dia.toFixed(2).toString().substring(1)
             }
-            if(dia >= 1){
-                  dia.toFixed(0)
+            if(parseFloat(dia) >= 1){
+                  dia = parseFloat(dia).toFixed(0)
             }
             var vel1 = Math.round(data[startDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"],0)
             var vel = vel1 //relative_velocity. get km/s reading. 0 d.p.
             var discal = data[startDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
             var dis = Math.round(discal,2) //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
-            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrrw, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>'+dis+'</b> MM km<p> </div> </div> </div>'
-      }
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>'+dis+'</b> MM km<p> </div> </div> </div>'
+}
 
       $("#neo>p").append(addString)
       })
