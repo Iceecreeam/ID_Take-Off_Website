@@ -36,8 +36,21 @@ function picOfDay() {
 /*load values into near earth objects section*/
 NEO()
 function NEO() {
-      var startDate = "2021-02-01" /*get todays date*/
-      var endDate = "2021-02-02" /*get tomorrow's date*/
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+      today = `${yyyy}-${mm}-${dd}`;
+      var tmr = new Date();
+      var dd = String(tmr.getDate()+1).padStart(2, '0');
+      var mm = String(tmr.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = tmr.getFullYear();
+      tmr = `${yyyy}-${mm}-${dd}`;
+      document.write(today);
+      
+      var startDate = today /*get todays date*/
+      var endDate = tmr /*get tomorrow's date*/
+      console.log(startDate)
 
 
       fetch("https://api.nasa.gov/neo/rest/v1/feed?start_date=" + startDate + "&end_date=" + endDate + "&api_key=0kDrOBtIYM2fhZoVrtf80AaSIzg4Tb7PPSeJ1bfu")
@@ -89,12 +102,22 @@ function NEO() {
       /*tomorrow loop*/
       for (var i =0; i < numTmr; i++){   
             var dayTime = '12:04' //Change variable time in this format  CONVERT FROM UTC TO SGT!!!!!!
-            var link = 'http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=3005973' //nasa_jpl_url
-            var name = '1995 CR' //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
-            var dia = '0.2' //Get reading in kilometers (average between min and max). 1 d.p. if less than 10. 0 d.p if more than 10
-            var vel = '45' //relative_velocity. get km/s reading. 0 d.p.
-            var dis = '68' //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
-            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrrw, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>68</b> MM km<p> </div> </div> </div>'
+            var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
+            var name = data[startDate][i]["name"] //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
+            var diamin =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
+            var diamax =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_max"])
+            var dia = ((diamax+diamin)/2)
+            if (dia < 1){
+                  dia = dia.toFixed(2).toString().substring(1)
+            }
+            if(dia >= 1){
+                  dia.toFixed(0)
+            }
+            var vel1 = Math.round(data[startDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"],0)
+            var vel = vel1 //relative_velocity. get km/s reading. 0 d.p.
+            var discal = data[startDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
+            var dis = Math.round(discal,2) //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrrw, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>'+dis+'</b> MM km<p> </div> </div> </div>'
       }
 
       $("#neo>p").append(addString)
