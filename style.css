@@ -54,7 +54,7 @@ h6{
 }
 
 .neoName, .neoInfoRight>div>p>b{
-	font-size: 4vw;
+	font-size: 3.8vw;
 	line-height: 3vw;
 }
 .neoDateTime, .neoName{
@@ -72,14 +72,14 @@ iframe {
 
 .tit {
 	margin: auto 0;
-	line-height: 2vw;
-	font-size: 1.7vw;
-	letter-spacing: 0.1vw;
+	line-height: 1.8vw;
+	font-size: 1.5vw;
+	letter-spacing: 0.05vw;
 }
 
 .art>span>img {
 	border-radius: 50%;
-	width: 10.5vw;
-	height: 10.5vw;
+	width: 9.5vw;
+	height: 9.5vw;
 	object-fit: cover
 }

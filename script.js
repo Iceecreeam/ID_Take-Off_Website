@@ -11,18 +11,21 @@ function picOfDay() {
          console.log(data)
          if(data["media_type"] == "video"){
             
-            $("#photoDay>p.desc").append('<iframe class="col-12 pt-2 dayvid" src="" frameBorder="0"></iframe>')
+            $("#photoDay>p.desc").append('<iframe class="col-12 pt-4 dayvid" src="" frameBorder="0"></iframe>')
             $(".dayvid").attr("src",data["url"])
          }
          else if (data["media_type"] == "image"){
-            $("#photoDay>p.desc").append('<img class="col-12 daypic" src="" alt="photoOfDay">')
+            $("#photoDay>p.desc").append('<img class="col-12 pt-4 daypic" src="" alt="photoOfDay">')
             $(".daypic").attr("src",data["url"])
          }
          else{
-            $("#photoDay>p.desc").append('It seems like this media type is unsupported.')
+            $("#photoDay>p.desc").append('<br>It seems like this media type is unsupported.')
          }
+
          $(".imgTit>b").text(data["title"])
          $("#explain").text(data["explanation"])
+         $("#photoDay>h4>#date").text("insert date here") /////////////////////////////
+         
          if (data["copyright"] != null){
             $("#photoDay>h4>#date").append('<b> | </b>' + '<span id="copyright">'+ data["copyright"] +'</span>' )
          }
@@ -30,20 +33,17 @@ function picOfDay() {
 
 }
 
-
-
-
 /*load values into near earth objects section*/
 NEO()
 function NEO() {
       var today = new Date();
       var dd = String(today.getDate()).padStart(2, '0');
-      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var mm = String(today.getMonth() + 1).padStart(2, '0')
       var yyyy = today.getFullYear();
       today = `${yyyy}-${mm}-${dd}`;
       var tmr = new Date();
       var dd = String(tmr.getDate()+1).padStart(2, '0');
-      var mm = String(tmr.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var mm = String(tmr.getMonth() + 1).padStart(2, '0');
       var yyyy = tmr.getFullYear();
       tmr = `${yyyy}-${mm}-${dd}`;
       
@@ -77,7 +77,7 @@ function NEO() {
 
       /*today loop*/
       for (var i =0; i < numTdy; i++){   
-            var dayTime = '12:04' //Change variable time in this format. CONVERT FROM UTC TO SGT!!!!!!
+            var dayTime = '12:04' //Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
             var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[startDate][i]["name"] //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
             var diamin =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
@@ -86,9 +86,13 @@ function NEO() {
             if (dia < 1){
                   dia = dia.toFixed(2).toString().substring(1)
             }
-            if(parseFloat(dia) >= 1){
-                  dia = parseFloat(dia).toFixed(0)
+            else if(parseFloat(dia) >= 1 && parseFloat(dia) < 10){
+                  dia = parseFloat(dia).toFixed(1)
             }
+            else{
+                  console.log(dia)
+                  dia = parseFloat(dia).toFixed(0)
+            }            
             var vel1 = Math.round(data[startDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"],0)
             var vel = vel1 //relative_velocity. get km/s reading. 0 d.p.
             var discal = data[startDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
@@ -99,21 +103,25 @@ function NEO() {
 
       /*tomorrow loop*/
       for (var i =0; i < numTmr; i++){   
-            var dayTime = '12:04' //Change variable time in this format  CONVERT FROM UTC TO SGT!!!!!!
-            var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
-            var name = data[startDate][i]["name"] //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
-            var diamin =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
-            var diamax =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_max"])
+            var dayTime = '12:04' //Change variable time in this format  ***CONVERT FROM UTC TO SGT****!!!!!!
+            var link = data[endDate][i]["nasa_jpl_url"] //nasa_jpl_url
+            var name = data[endDate][i]["name"] //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
+            var diamin =  parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
+            var diamax =  parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_max"])
             var dia = ((diamax+diamin)/2)
             if (dia < 1){
                   dia = dia.toFixed(2).toString().substring(1)
             }
-            if(parseFloat(dia) >= 1){
-                  dia = parseFloat(dia).toFixed(0)
+            else if(parseFloat(dia) >= 1 && parseFloat(dia) < 10){
+                  dia = parseFloat(dia).toFixed(1)
             }
-            var vel1 = Math.round(data[startDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"],0)
+            else{
+                  console.log(dia)
+                  dia = parseFloat(dia).toFixed(0)
+            } 
+            var vel1 = Math.round(data[endDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"],0)
             var vel = vel1 //relative_velocity. get km/s reading. 0 d.p.
-            var discal = data[startDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
+            var discal = data[endDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
             var dis = Math.round(discal,2) //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
             addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>'+dis+'</b> MM km<p> </div> </div> </div>'
 }
@@ -134,12 +142,19 @@ function spaceyNews() {
          .then(response => response.text())
          .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
          .then(function(data){   
-               
-            console.log(data)
-            
-         
-
-      })
+            var channel = data.querySelectorAll("channel")[0]
+            var items = channel.querySelectorAll("item")
+            console.log(channel)
+            for (var i = 0; i<20; i++){
+                  var link = items[i].querySelectorAll("guid")[0].innerHTML
+                  var shortDesc = items[i].querySelectorAll("description")[0].innerHTML
+                  var timePos = items[i].querySelectorAll("pubDate")[0].innerHTML
+                  var tit = items[i].querySelectorAll("title")[0].innerHTML
+                  var imag = items[i].querySelectorAll("enclosure")[0].getAttribute('url')
+                  $("#news>p.desc").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`)
+            }
+            $(".UpD>span").text(channel.querySelectorAll("pubDate")[0].innerHTML)
+       })
 }
 
 
