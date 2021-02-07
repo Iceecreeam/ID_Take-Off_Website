@@ -144,7 +144,7 @@ function spaceyNews() {
          .then(function(data){   
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
-            for (var i = 0; i<20; i++){
+            for (var i = 0; i<22; i++){
                   var link = items[i].querySelectorAll("guid")[0].innerHTML
                   var shortDesc = items[i].querySelectorAll("description")[0].innerHTML.replaceAll('"', "'");
                   var timePos = items[i].querySelectorAll("pubDate")[0].innerHTML
@@ -159,6 +159,10 @@ function spaceyNews() {
 /*something cool*/
 function sthCool() {
       var keyword =$(".coolKey")[0].value
+      if(keyword == "" || !keyword.replace(/\s/g, '').length){
+            alert("please enter a keyword.")
+            return
+      }
       var type = $(".dropdown-toggle").text()
       console.log(keyword)
       console.log(type)
@@ -166,6 +170,7 @@ function sthCool() {
       .then(response => response.json())
       .then(data => data)
       .then(function(data){
+            $(".card-img-top").text("")
             console.log(data)
 })
 }
@@ -174,6 +179,7 @@ function sthCool() {
 $(document).on("click", ".dropMed" , function() {
       ($(this).parent().siblings("button")).text($(this).text())
       sthCool()
+      console.log($(".show"))
 })
 
 

@@ -15,6 +15,9 @@
       <link rel="stylesheet" href="style.css">
       <!--Fonts-->
       <link rel="preconnect" href="https://fonts.gstatic.com">
+      <!--lottie-->
+      <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
       <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
       <!--font-family: 'Montserrat', sans-serif;-->
       <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
@@ -113,14 +116,14 @@
                
             </div>
 
-            
+
             <!--random cool thing-->
             <div class="p-3 text-center d-flex flex-wrap justify-content-center tile" id ="cool">
                <h1 class="tiletit">Something Cool?</h1>
                <p class="desc">Take a gander at our cool astronomy-related randomiser</p>
                
                <div class="col-10 mb-4 p-0 input-group">
-                  <input type="text" class="form-control coolKey" placeholder="Enter a keyword!" aria-label="Text input with dropdown button">
+                  <input type="text" onfocus="this.value=''" class="form-control coolKey" placeholder="Enter a keyword!" aria-label="Text input with dropdown button">
                   <div class="input-group-append">
                   <button class="btn btn-default bg-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      Surprise me
@@ -133,7 +136,9 @@
 
                <div class="col-10 p-2 justify-content-center card" style="width: 18rem;">
                   <div class="p-1 card-body">
-                     <div class="p-2 bg-secondary card-img-top">
+                     <div class="p-2 bg-secondary justify-content-center card-img-top">
+                        
+                        <lottie-player class="d-inline w-100" src="https://assets5.lottiefiles.com/packages/lf20_XWP6mV.json" mode="bounce" background="transparent"  speed="5.8"  loop  autoplay></lottie-player>
                         <!--<audio class="col-12 p-0 mt-1" controls>
                            <source src="http://images-assets.nasa.gov/audio/KSC-STS-131SSTA_01/KSC-STS-131SSTA_01~128k.mp3" type="audio/mpeg">
                            Your browser does not support the audio element.
@@ -141,8 +146,8 @@
                         <img class="d-inline p-0 w-100" src="https://apod.nasa.gov/apod/image/2102/MeteorStreak_Kuszaj_1080.jpg" alt="Card image cap">
                      -->
                      </div>
-                    <h5 class="m-0 card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="m-0 card-title">The planetary soup is stirring</h5>
+                    <p class="card-text">What shall bubble to the surface?</p>
                   </div>
                 </div>
 
