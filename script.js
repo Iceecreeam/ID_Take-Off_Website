@@ -180,16 +180,21 @@ $(document).on("click", ".dropMed" , function() {
 
 /*Modify popover settings*/
 $(document).on("mouseenter", ".art", function() {
-      $('[data-toggle="popover"]').popover({
-            placement : 'top',
-        });
-        $(this).popover('show');
-  });
-  
-  $(document).on("mouseleave", ".art", function() {
-      $(this).popover('hide');
-  });
+$('[data-toggle="popover"]').popover({
+      placement : 'top',
+      });
+      $(this).popover('show');
+});
 
+$(document).on("mouseleave", ".art", function() {
+$(this).popover('hide');
+});
+
+
+/*remove focus on article after clicked*/
+$(document).on("click", ".art",  function(){
+      $(".art").blur()
+})
 
 
 
