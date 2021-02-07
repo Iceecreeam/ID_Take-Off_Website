@@ -144,7 +144,7 @@ function spaceyNews() {
          .then(function(data){   
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
-            for (var i = 0; i<20; i++){
+            for (var i = 0; i<19; i++){
                   var link = items[i].querySelectorAll("guid")[0].innerHTML
                   var shortDesc = items[i].querySelectorAll("description")[0].innerHTML.replaceAll('"', "'");
                   var timePos = items[i].querySelectorAll("pubDate")[0].innerHTML
@@ -189,28 +189,39 @@ function sthCool() {
             })
 
             if(items.length <= 0 || data.length == 0){
-                  console.log("empty")
+                  $(".card-img-top").html(`<lottie-player src="https://assets10.lottiefiles.com/temp/lf20_dzWAyu.json"  background="transparent"  speed="0.5"  style="width: 100%"  loop  autoplay></lottie-player>`)                
+                  $(".card-title").text("You have angered the cosmos")
+                  $(".card-text").text("It demands a query clearer than its brightest star, and broader than itself")
             }
             else{
                   enNo = Math.floor(Math.random() * items.length)
                   var item = items[enNo]
-                  console.log(item)
-                  if(item["media_type"] == "image"){
-                        var tit = item["title"]
-                        var cap = item["description"]
-                        var href = "https://apod.nasa.gov/apod/image/2102/MeteorStreak_Kuszaj_1080.jpg"
-                        $(".card-img-top").html(`<img class="d-inline p-0 w-100" src="`+href+`" alt="Card image cap">`)
-                        $(".card-title").text(tit)
-                        $(".card-text").text(cap)
-                  }
-                  else if(item["media_type"] == "audio"){
-                        var href = "http://images-assets.nasa.gov/audio/KSC-STS-131SSTA_01/KSC-STS-131SSTA_01~128k.mp3"
-                        var tit = item["title"]
-                        var cap = item["description"]
-                        $(".card-img-top").html(`<audio class="col-12 p-0 mt-1" controls><source src="`+href+`" type="audio/mpeg">Your browser does not support the audio element.</audio>`)
-                        $(".card-title").text(tit)
-                        $(".card-text").text(cap)
-                  }
+                  var tit = item["title"]
+                  var cap = item["description"]
+                  $(".card-title").text(tit)
+                  $(".card-text").text(cap)
+
+                  var href = item["href"]
+                  fetch(href)
+                  .then(response => response.json())
+                  .then(data => data)
+                  .then(function(data){
+                        for (var i = 0; i < data.length; i++){
+                              
+                              if(data[i].substr(data[i].length - 3) == "jpg" || data[i].substr(data[i].length - 3) == "png"){
+                                    href = data[i]
+                                    $(".card-img-top").html(`<img class="d-inline p-0 w-100" src="`+href+`" alt="Card image cap">`)
+                                    break;
+                              }
+                              
+                              if(data[i].substr(data[i].length - 3) == "mp3" ||data[i].substr(data[i].length - 3) == "m4a" || data[i].substr(data[i].length - 3) == "wav"){
+                                    href = data[i]
+                                    $(".card-img-top").html(`<audio class="col-12 p-0 mt-1" controls><source src="`+href+`" type="audio/mpeg">Your browser does not support the audio element.</audio>`)
+                                    break;
+                              }
+                        }
+                  })
+
             }
 
 
