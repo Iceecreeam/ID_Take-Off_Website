@@ -158,7 +158,9 @@ function spaceyNews() {
 
 /*something cool*/
 function sthCool() {
-      $(".card-img-top").html(`<lottie-player class="d-inline w-100" src="https://assets5.lottiefiles.com/packages/lf20_XWP6mV.json" mode="bounce" background="transparent"  speed="5.8"  loop  autoplay></lottie-player>`)    
+      $(".card-img-top").html(`<lottie-player class="d-inline w-75" src="https://assets5.lottiefiles.com/packages/lf20_XWP6mV.json" mode="bounce" background="transparent"  speed="5.8"  loop  autoplay></lottie-player>`)
+      $(".card-title").text("The planetary soup is stirring")
+      $(".card-text").text("What shall bubble to the surface?")
       var keyword =$(".coolKey")[0].value
       if(keyword == "" || !keyword.replace(/\s/g, '').length){
             alert("Please enter a keyword!")
@@ -172,6 +174,7 @@ function sthCool() {
             var items = []
             data.forEach(i => {
                   var item = i["data"][0]
+                  item["href"] = i["href"]
                   if(type == "image" || type == "audio"){
                         if (item["media_type"] == type){
                               items.push(item)
@@ -182,6 +185,7 @@ function sthCool() {
                               items.push(item)
                         }
                   }
+
             })
 
             if(items.length <= 0 || data.length == 0){
@@ -192,12 +196,20 @@ function sthCool() {
                   var item = items[enNo]
                   console.log(item)
                   if(item["media_type"] == "image"){
-                        $(".card-img-top").html(`<img class="d-inline p-0 w-100" src="https://apod.nasa.gov/apod/image/2102/MeteorStreak_Kuszaj_1080.jpg" alt="Card image cap">`)
-                        $(".card-title").text("hello")
-                        $(".card-text").text("test")
+                        var tit = item["title"]
+                        var cap = item["description"]
+                        var href = "https://apod.nasa.gov/apod/image/2102/MeteorStreak_Kuszaj_1080.jpg"
+                        $(".card-img-top").html(`<img class="d-inline p-0 w-100" src="`+href+`" alt="Card image cap">`)
+                        $(".card-title").text(tit)
+                        $(".card-text").text(cap)
                   }
                   else if(item["media_type"] == "audio"){
-                        $(".card-img-top").html(`<audio class="col-12 p-0 mt-1" controls><source src="http://images-assets.nasa.gov/audio/KSC-STS-131SSTA_01/KSC-STS-131SSTA_01~128k.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>`)
+                        var href = "http://images-assets.nasa.gov/audio/KSC-STS-131SSTA_01/KSC-STS-131SSTA_01~128k.mp3"
+                        var tit = item["title"]
+                        var cap = item["description"]
+                        $(".card-img-top").html(`<audio class="col-12 p-0 mt-1" controls><source src="`+href+`" type="audio/mpeg">Your browser does not support the audio element.</audio>`)
+                        $(".card-title").text(tit)
+                        $(".card-text").text(cap)
                   }
             }
 

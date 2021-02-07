@@ -35,11 +35,11 @@ h6{
 	line-height: 3.8vw;
 }
 
-.imgTit{
+.imgTit, .card-title{
 	font-size: 2.5vw;
 	line-height: 2.5vw;
 }
-.dropMed, .dropdown-toggle, .coolKey, .artim{
+.dropMed, .dropdown-toggle, .coolKey, .artim {
 	font-size: 1.5vw;
 	line-height: 1.7vw;
 }
