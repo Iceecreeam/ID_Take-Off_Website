@@ -123,7 +123,7 @@ function NEO() {
             var vel = vel1 //relative_velocity. get km/s reading. 0 d.p.
             var discal = data[endDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
             var dis = Math.round(discal,2) //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
-            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>'+dis+'</b> MM km<p> </div> </div> </div>'
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrrw, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>'+dis+'</b> MM km<p> </div> </div> </div>'
 }
 
       $("#neo>p").append(addString)
@@ -144,36 +144,51 @@ function spaceyNews() {
          .then(function(data){   
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
-            console.log(channel)
             for (var i = 0; i<20; i++){
                   var link = items[i].querySelectorAll("guid")[0].innerHTML
-                  var shortDesc = items[i].querySelectorAll("description")[0].innerHTML
+                  var shortDesc = items[i].querySelectorAll("description")[0].innerHTML.replaceAll('"', "'");
                   var timePos = items[i].querySelectorAll("pubDate")[0].innerHTML
                   var tit = items[i].querySelectorAll("title")[0].innerHTML
                   var imag = items[i].querySelectorAll("enclosure")[0].getAttribute('url')
                   $("#news>p.desc").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`)
             }
-            $(".UpD>span").text(channel.querySelectorAll("pubDate")[0].innerHTML)
+            $(".UpD>b>span").text(channel.querySelectorAll("pubDate")[0].innerHTML)
        })
 }
 
+/*something cool*/
+function sthCool() {
+      var keyword =$(".coolKey")[0].value
+      var type = $(".dropdown-toggle").text()
+      console.log(keyword)
+      console.log(type)
+      fetch("https://images-api.nasa.gov/search?q=" + keyword)
+      .then(response => response.json())
+      .then(data => data)
+      .then(function(data){
+            console.log(data)
+})
+}
 
 /*change innerhtml of drowpdown button to selection*/
 $(document).on("click", ".dropMed" , function() {
       ($(this).parent().siblings("button")).text($(this).text())
-   })
+      sthCool()
+})
+
+
 
 /*Modify popover settings*/
-$(document).ready(function(){
+$(document).on("mouseenter", ".art", function() {
       $('[data-toggle="popover"]').popover({
-          placement : 'top',
-          trigger : 'hover'
-      });
-});
-
-
-
-
+            placement : 'top',
+        });
+        $(this).popover('show');
+  });
+  
+  $(document).on("mouseleave", ".art", function() {
+      $(this).popover('hide');
+  });
 
 
 
