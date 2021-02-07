@@ -144,7 +144,7 @@ function spaceyNews() {
          .then(function(data){   
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
-            for (var i = 0; i<22; i++){
+            for (var i = 0; i<20; i++){
                   var link = items[i].querySelectorAll("guid")[0].innerHTML
                   var shortDesc = items[i].querySelectorAll("description")[0].innerHTML.replaceAll('"', "'");
                   var timePos = items[i].querySelectorAll("pubDate")[0].innerHTML
