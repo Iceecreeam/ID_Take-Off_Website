@@ -158,23 +158,51 @@ function spaceyNews() {
 
 /*something cool*/
 function sthCool() {
+      $(".card-img-top").html(`<lottie-player class="d-inline w-100" src="https://assets5.lottiefiles.com/packages/lf20_XWP6mV.json" mode="bounce" background="transparent"  speed="5.8"  loop  autoplay></lottie-player>`)    
       var keyword =$(".coolKey")[0].value
       if(keyword == "" || !keyword.replace(/\s/g, '').length){
             alert("Please enter a keyword!")
             return
       }
       var type = $(".dropdown-toggle").text()
-      console.log(keyword)
-      console.log(type)
       fetch("https://images-api.nasa.gov/search?q=" + keyword)
       .then(response => response.json())
       .then(data => data["collection"]["items"])
       .then(function(data){
-            $(".card-img-top").text("")
-            console.log(data)
-            console.log(data.length)
+            var items = []
+            data.forEach(i => {
+                  var item = i["data"][0]
+                  if(type == "image" || type == "audio"){
+                        if (item["media_type"] == type){
+                              items.push(item)
+                        }
+                  }
+                  else{
+                        if (item["media_type"] == "image" || item["media_type"] == "audio"){
+                              items.push(item)
+                        }
+                  }
+            })
 
-})
+            if(items.length <= 0 || data.length == 0){
+                  console.log("empty")
+            }
+            else{
+                  enNo = Math.floor(Math.random() * items.length)
+                  var item = items[enNo]
+                  console.log(item)
+                  if(item["media_type"] == "image"){
+                        $(".card-img-top").html(`<img class="d-inline p-0 w-100" src="https://apod.nasa.gov/apod/image/2102/MeteorStreak_Kuszaj_1080.jpg" alt="Card image cap">`)
+                        $(".card-title").text("hello")
+                        $(".card-text").text("test")
+                  }
+                  else if(item["media_type"] == "audio"){
+                        $(".card-img-top").html(`<audio class="col-12 p-0 mt-1" controls><source src="http://images-assets.nasa.gov/audio/KSC-STS-131SSTA_01/KSC-STS-131SSTA_01~128k.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>`)
+                  }
+            }
+
+
+      })
 }
 
 /*change innerhtml of drowpdown button to selection*/
