@@ -90,13 +90,28 @@ function NEO() {
                   dia = parseFloat(dia).toFixed(1)
             }
             else{
-                  console.log(dia)
                   dia = parseFloat(dia).toFixed(0)
-            }            
-            var vel1 = Math.round(data[startDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"],0)
-            var vel = vel1 //relative_velocity. get km/s reading. 0 d.p.
-            var discal = data[startDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
-            var dis = Math.round(discal,2) //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
+            } 
+            var vel = data[startDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"]
+            if (vel < 1){
+                  vel = vel.toFixed(2).toString().substring(1)
+            }
+            else if(parseFloat(vel) >= 1 && parseFloat(vel) < 10){
+                  vel = parseFloat(vel).toFixed(1)
+            }
+            else{
+                  vel = parseFloat(vel).toFixed(0)
+            } 
+            var dis = data[startDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
+            if (dis < 1){
+                  dis = dis.toFixed(2).toString().substring(1)
+            }
+            else if(parseFloat(dis) >= 1 && parseFloat(dis) < 10){
+                  dis = parseFloat(dis).toFixed(1)
+            }
+            else{
+                  dis = parseFloat(dis).toFixed(0)
+            } 
             addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>'+dis+'</b> MM km<p> </div> </div> </div>'
 
       }
@@ -105,7 +120,7 @@ function NEO() {
       for (var i =0; i < numTmr; i++){   
             var dayTime = '12:04' //Change variable time in this format  ***CONVERT FROM UTC TO SGT****!!!!!!
             var link = data[endDate][i]["nasa_jpl_url"] //nasa_jpl_url
-            var name = data[startDate][i]["name"].substring(data[startDate][i]["name"].indexOf("(") + 1, data[startDate][i]["name"].indexOf(")"))
+            var name = data[endDate][i]["name"].substring(data[endDate][i]["name"].indexOf("(") + 1, data[endDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
             var diamax =  parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_max"])
             var dia = ((diamax+diamin)/2)
@@ -116,15 +131,31 @@ function NEO() {
                   dia = parseFloat(dia).toFixed(1)
             }
             else{
-                  console.log(dia)
                   dia = parseFloat(dia).toFixed(0)
             } 
-            var vel1 = Math.round(data[endDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"],0)
-            var vel = vel1 //relative_velocity. get km/s reading. 0 d.p.
-            var discal = data[endDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
-            var dis = Math.round(discal,2) //miss_distance. get km reading. divide by 1 million and make it 0 d.p.
+            var vel = data[endDate][i]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"]
+            if (vel < 1){
+                  vel = vel.toFixed(2).toString().substring(1)
+            }
+            else if(parseFloat(vel) >= 1 && parseFloat(vel) < 10){
+                  vel = parseFloat(vel).toFixed(1)
+            }
+            else{
+                  vel = parseFloat(vel).toFixed(0)
+            } 
+            var dis = data[endDate][i]["close_approach_data"][0]["miss_distance"]["kilometers"]/1000000
+            if (dis < 1){
+                  dis = dis.toFixed(2).toString().substring(1)
+            }
+            else if(parseFloat(dis) >= 1 && parseFloat(dis) < 10){
+                  dis = parseFloat(dis).toFixed(1)
+            }
+            else{
+                  dis = parseFloat(dis).toFixed(0)
+            } 
             addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrrw, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Closest Dist</p> <p><b>'+dis+'</b> MM km<p> </div> </div> </div>'
 }
+      $("#cometLoad").remove()
 
       $("#neo>p").append(addString)
       })
