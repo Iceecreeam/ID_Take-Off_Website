@@ -79,7 +79,7 @@ function NEO() {
       for (var i =0; i < numTdy; i++){   
             var dayTime = '12:04' //Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
             var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
-            var name = data[startDate][i]["name"] //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
+            var name = data[startDate][i]["name"].substring(data[startDate][i]["name"].indexOf("(") + 1, data[startDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
             var diamax =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_max"])
             var dia = ((diamax+diamin)/2)
@@ -105,7 +105,7 @@ function NEO() {
       for (var i =0; i < numTmr; i++){   
             var dayTime = '12:04' //Change variable time in this format  ***CONVERT FROM UTC TO SGT****!!!!!!
             var link = data[endDate][i]["nasa_jpl_url"] //nasa_jpl_url
-            var name = data[endDate][i]["name"] //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
+            var name = data[startDate][i]["name"].substring(data[startDate][i]["name"].indexOf("(") + 1, data[startDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
             var diamax =  parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_max"])
             var dia = ((diamax+diamin)/2)
@@ -160,7 +160,7 @@ function spaceyNews() {
 function sthCool() {
       var keyword =$(".coolKey")[0].value
       if(keyword == "" || !keyword.replace(/\s/g, '').length){
-            alert("please enter a keyword.")
+            alert("Please enter a keyword!")
             return
       }
       var type = $(".dropdown-toggle").text()
@@ -168,10 +168,12 @@ function sthCool() {
       console.log(type)
       fetch("https://images-api.nasa.gov/search?q=" + keyword)
       .then(response => response.json())
-      .then(data => data)
+      .then(data => data["collection"]["items"])
       .then(function(data){
             $(".card-img-top").text("")
             console.log(data)
+            console.log(data.length)
+
 })
 }
 
@@ -179,7 +181,7 @@ function sthCool() {
 $(document).on("click", ".dropMed" , function() {
       ($(this).parent().siblings("button")).text($(this).text())
       sthCool()
-      console.log($(".show"))
+      
 })
 
 
