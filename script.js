@@ -77,7 +77,11 @@ function NEO() {
 
       /*today loop*/
       for (var i =0; i < numTdy; i++){   
-            var dayTime = '12:04' //Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
+            var dayTime = new Date(data[startDate][i]["close_approach_data"][0]["close_approach_date_full"])//Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
+            console.log(dayTime.getHours,dayTime.getMinutes)
+            
+      
+            
             var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[startDate][i]["name"] //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
             var diamin =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
@@ -103,7 +107,7 @@ function NEO() {
 
       /*tomorrow loop*/
       for (var i =0; i < numTmr; i++){   
-            var dayTime = '12:04' //Change variable time in this format  ***CONVERT FROM UTC TO SGT****!!!!!!
+            var dayTime = data[startDate][i]["close_approach_date_full"] //Change variable time in this format  ***CONVERT FROM UTC TO SGT****!!!!!!
             var link = data[endDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[endDate][i]["name"] //name. search for brackets in the value of the name key (could appear as 'eros (1995 CR) or (1995 CR). ONLY PUT THE STUFF IN THE BRACKETS.')
             var diamin =  parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
