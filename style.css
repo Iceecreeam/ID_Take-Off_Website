@@ -1,7 +1,7 @@
 body{
 	background-color: #cccccc;
 	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 1.3vw;
+	font-size: 1.1vw;
 	line-height: 1.9vw;
 	padding: 0;
 	margin: 0;
@@ -35,11 +35,11 @@ h6{
 	line-height: 3.8vw;
 }
 
-.imgTit{
+.imgTit, .card-title{
 	font-size: 2.5vw;
 	line-height: 2.5vw;
 }
-.dropMed, .dropdown-toggle, .coolKey, .artim{
+.dropMed, .dropdown-toggle, .coolKey, .artim {
 	font-size: 1.5vw;
 	line-height: 1.7vw;
 }
@@ -54,7 +54,7 @@ h6{
 }
 
 .neoName, .neoInfoRight>div>p>b{
-	font-size: 3.8vw;
+	font-size: 3.15vw;
 	line-height: 3vw;
 }
 .neoDateTime, .neoName{
