@@ -8,7 +8,6 @@ function picOfDay() {
          .then(function(data){
 
          /*modify json for use*/
-         console.log(data)
          if(data["media_type"] == "video"){
             
             $("#photoDay>p.desc").append('<iframe class="col-12 pt-4 dayvid" src="" frameBorder="0"></iframe>')
@@ -24,7 +23,7 @@ function picOfDay() {
 
          $(".imgTit>b").text(data["title"])
          $("#explain").text(data["explanation"])
-         $("#photoDay>h4>#date").text("insert date here") /////////////////////////////
+         $("#photoDay>h4>#date").text(data["date"])
          
          if (data["copyright"] != null){
             $("#photoDay>h4>#date").append('<b> | </b>' + '<span id="copyright">'+ data["copyright"] +'</span>' )
@@ -61,8 +60,6 @@ function NEO() {
       var numTdy = 4
       var numTmr = 4
 
-      console.log(data) /*shows json data */
-
       if (data[startDate].length<4){ 
             numTdy = data[startDate].length;
           }
@@ -77,7 +74,12 @@ function NEO() {
 
       /*today loop*/
       for (var i =0; i < numTdy; i++){   
-            var dayTime = '12:04' //Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
+
+            var dayTime = new Date(data[startDate][i]["close_approach_data"][0]["close_approach_date_full"])//Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
+            var time = dayTime.toLocaleTimeString('en-US', { hour12: false, 
+                  hour: "numeric", 
+                  minute: "numeric"});
+            dayTime = time
             var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[startDate][i]["name"].substring(data[startDate][i]["name"].indexOf("(") + 1, data[startDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
@@ -118,7 +120,11 @@ function NEO() {
 
       /*tomorrow loop*/
       for (var i =0; i < numTmr; i++){   
-            var dayTime = '12:04' //Change variable time in this format  ***CONVERT FROM UTC TO SGT****!!!!!!
+            var dayTime = new Date(data[startDate][i]["close_approach_data"][0]["close_approach_date_full"])//Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
+            var time = dayTime.toLocaleTimeString('en-US', { hour12: false, 
+                  hour: "numeric", 
+                  minute: "numeric"});
+            dayTime = time
             var link = data[endDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[endDate][i]["name"].substring(data[endDate][i]["name"].indexOf("(") + 1, data[endDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
@@ -173,6 +179,7 @@ function spaceyNews() {
          .then(response => response.text())
          .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
          .then(function(data){   
+            
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
             $("#newsLoad").css("display", "none")
@@ -181,6 +188,9 @@ function spaceyNews() {
                   var link = items[i].querySelectorAll("guid")[0].innerHTML
                   var shortDesc = items[i].querySelectorAll("description")[0].innerHTML.replaceAll('"', "'");
                   var timePos = items[i].querySelectorAll("pubDate")[0].innerHTML
+
+                  /*ADD YOUR IF ELSE HERE JAMES*/
+
                   var tit = items[i].querySelectorAll("title")[0].innerHTML
                   var imag = items[i].querySelectorAll("enclosure")[0].getAttribute('url')
                   $("#news>p.desc").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`)
@@ -276,9 +286,7 @@ function rockMove() {
       function frame() {
         if (pos == 350) {
           clearInterval(id);
-        } else {
-              console.log()
-            
+        } else {            
               $(".path").css("padding-top",         parseFloat($(".path").css("padding-top").substr(0, $(".path").css("padding-top").length-2))     -3)
         }
       }
