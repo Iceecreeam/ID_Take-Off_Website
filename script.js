@@ -175,6 +175,8 @@ function spaceyNews() {
          .then(function(data){   
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
+            $("#newsLoad").css("display", "none")
+            $("#cors").css("display", "none")
             for (var i = 0; i<19; i++){
                   var link = items[i].querySelectorAll("guid")[0].innerHTML
                   var shortDesc = items[i].querySelectorAll("description")[0].innerHTML.replaceAll('"', "'");
@@ -183,7 +185,7 @@ function spaceyNews() {
                   var imag = items[i].querySelectorAll("enclosure")[0].getAttribute('url')
                   $("#news>p.desc").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`)
             }
-            $(".UpD>b>span").text(channel.querySelectorAll("pubDate")[0].innerHTML)
+            $("#news>p.desc").append(` <p class="m-0 UpD">Last updated <b>| <span>`+channel.querySelectorAll("pubDate")[0].innerHTML+`</span></b></p>`)
        })
 }
 
@@ -266,6 +268,30 @@ $(document).on("click", ".dropMed" , function() {
       
 })
 
+/*move rocket*/
+rockMove()
+function rockMove() {
+      var pos = 0;
+      var id = setInterval(frame, 10);
+      function frame() {
+        if (pos == 350) {
+          clearInterval(id);
+        } else {
+              console.log()
+            
+              $(".path").css("padding-top",         parseFloat($(".path").css("padding-top").substr(0, $(".path").css("padding-top").length-2))     -3)
+        }
+      }
+}
+
+
+/*if user clicks on rocket*/
+$(document).on("click", "#rockLoad" , function(){
+   $(".path").html(`<lottie-player id="exxx" src="https://assets5.lottiefiles.com/packages/lf20_MVp95j.json"  background="transparent"  speed="1"  style="width:100%;height: 100px;" autoplay></lottie-player>`)
+})
+
+
+
 
 
 /*Modify popover settings*/
@@ -275,7 +301,6 @@ $('[data-toggle="popover"]').popover({
       });
       $(this).popover('show');
 });
-
 $(document).on("mouseleave", ".art", function() {
 $(this).popover('hide');
 });
