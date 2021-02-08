@@ -24,7 +24,7 @@ function picOfDay() {
 
          $(".imgTit>b").text(data["title"])
          $("#explain").text(data["explanation"])
-         $("#photoDay>h4>#date").text("insert date here") /////////////////////////////
+         $("#photoDay>h4>#date").text(data["date"]) /////////////////////////////
          
          if (data["copyright"] != null){
             $("#photoDay>h4>#date").append('<b> | </b>' + '<span id="copyright">'+ data["copyright"] +'</span>' )
@@ -77,11 +77,12 @@ function NEO() {
 
       /*today loop*/
       for (var i =0; i < numTdy; i++){   
+
             var dayTime = new Date(data[startDate][i]["close_approach_data"][0]["close_approach_date_full"])//Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
-            console.log(dayTime.getHours,dayTime.getMinutes)
-            
-      
-            
+            var time = dayTime.toLocaleTimeString('en-US', { hour12: false, 
+                  hour: "numeric", 
+                  minute: "numeric"});
+            dayTime = time
             var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[startDate][i]["name"].substring(data[startDate][i]["name"].indexOf("(") + 1, data[startDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
@@ -122,7 +123,11 @@ function NEO() {
 
       /*tomorrow loop*/
       for (var i =0; i < numTmr; i++){   
-            var dayTime = data[startDate][i]["close_approach_date_full"] //Change variable time in this format  ***CONVERT FROM UTC TO SGT****!!!!!!
+            var dayTime = new Date(data[startDate][i]["close_approach_data"][0]["close_approach_date_full"])//Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
+            var time = dayTime.toLocaleTimeString('en-US', { hour12: false, 
+                  hour: "numeric", 
+                  minute: "numeric"});
+            dayTime = time
             var link = data[endDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[endDate][i]["name"].substring(data[endDate][i]["name"].indexOf("(") + 1, data[endDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
@@ -177,8 +182,12 @@ function spaceyNews() {
          .then(response => response.text())
          .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
          .then(function(data){   
+            
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
+            console.log(data)
+            console.log(channel)
+            console.log(items)
             for (var i = 0; i<19; i++){
                   var link = items[i].querySelectorAll("guid")[0].innerHTML
                   var shortDesc = items[i].querySelectorAll("description")[0].innerHTML.replaceAll('"', "'");
