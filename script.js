@@ -295,7 +295,7 @@ function rockMove() {
 
 /*if user clicks on rocket*/
 $(document).on("click", "#rockLoad" , function(){
-   $(".path").html(`<lottie-player id="exxx" src="https://assets5.lottiefiles.com/packages/lf20_MVp95j.json"  background="transparent"  speed="1"  style="width:100%;height: 100px;" autoplay></lottie-player>`)
+   $(".path").html(`<lottie-player src="https://assets5.lottiefiles.com/packages/lf20_MVp95j.json"  background="transparent"  speed="1"  style="width:100%;height: 180px;" autoplay></lottie-player>`)
 })
 
 

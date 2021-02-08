@@ -84,6 +84,7 @@ iframe {
 	object-fit: cover
 }
 
+/*style rocket*/
 .path {
 	width:200px;
 	height:100%;
@@ -91,7 +92,7 @@ iframe {
 	top: 0%;
 	left: 50%;
 	margin-left: -100px;
-	padding-top: 100%;
+	padding-top: 70%;
   }
 #rockLoad {
 	position: absolute;
