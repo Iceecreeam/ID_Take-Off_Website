@@ -13,7 +13,7 @@ function picOfDay() {
             $(".dayvid").attr("src",data["url"])
          }
          else if (data["media_type"] == "image"){
-            $("#photoDay>p.desc").append('<img class="col-12 pt-4 daypic" src="" alt="photoOfDay">')
+            $("#photoDay>p.desc").append('<img class="col-12 p-md-5 p-2 pb-0 daypic" src="" alt="photoOfDay">')
             $(".daypic").attr("src",data["url"])
          }
          else{
