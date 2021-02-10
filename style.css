@@ -46,7 +46,7 @@ h6{
 
 .tile{
 	border-radius: 18px;
-	margin-top: 5%;
+	margin-top: 8%;
 }
 
 .tile:not(#main){
@@ -92,7 +92,7 @@ iframe {
 	top: 0%;
 	left: 50%;
 	margin-left: -100px;
-	padding-top: 70%;
+	padding-top: 100vh
   }
 #rockLoad {
 	position: absolute;

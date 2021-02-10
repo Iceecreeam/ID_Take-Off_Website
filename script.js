@@ -6,7 +6,6 @@ function picOfDay() {
          .then(response => response.json())
          .then(data => data)
          .then(function(data){
-
          /*modify json for use*/
          if(data["media_type"] == "video"){
             
@@ -26,7 +25,12 @@ function picOfDay() {
          $("#photoDay>h4>#date").text(data["date"])
          
          if (data["copyright"] != null){
-            $("#photoDay>h4>#date").append('<b> | </b>' + '<span id="copyright">'+ data["copyright"] +'</span>' )
+               var copyright = data["copyright"]
+            if (data["copyright"].includes("ESO Text:")){
+                  copyright =  data["copyright"].substr(0, data["copyright"].indexOf("ESO Text:"))
+            }
+
+            $("#photoDay>h4>#date").append('<b> | </b>' + '<span id="copyright">'+ copyright +'</span>' )
          }
          })
 
@@ -180,11 +184,12 @@ function spaceyNews() {
          .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
          .then(function(data){   
             
+            
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
             $("#newsLoad").css("display", "none")
             $("#cors").css("display", "none")
-            for (var i = 0; i<19; i++){
+            for (var i = 0; i<22; i++){
                   var link = items[i].querySelectorAll("guid")[0].innerHTML
                   var shortDesc = items[i].querySelectorAll("description")[0].innerHTML.replaceAll('"', "'");
                   var timePos = items[i].querySelectorAll("pubDate")[0].innerHTML
@@ -194,9 +199,7 @@ function spaceyNews() {
                   var currentDate = new Date()
                   
                   
-                  /*ADD YOUR IF ELSE HERE JAMES*/
                   var diff = Math.abs(newDate - currentDate)
-                  console.log(diff)
                   if (diff <= 3600000){
                         timePos = "Just Now"
                   }
@@ -211,7 +214,7 @@ function spaceyNews() {
                   }
 
                   else if(diff >= 86400000 && diff < 604800000 ){
-                        var days = (millisec / (1000 * 60 * 60 * 24)).toFixed(0);
+                        var days = (diff / (1000 * 60 * 60 * 24)).toFixed(0);
                         if (hours == 1){
                               timePos = `${days} day ago`
                         }
@@ -221,7 +224,7 @@ function spaceyNews() {
                         
                   }
                   else if(diff >= 604800000 ){
-                        var days = (millisec / (1000 * 60 * 60 * 24)).toFixed(0);
+                        var days = (diff / (1000 * 60 * 60 * 24)).toFixed(0);
                         var weeks = Math.floor(days / 7)
                         if (weeks == 1){
                               `${weeks} week ago`
@@ -230,11 +233,14 @@ function spaceyNews() {
                               `${weeks} weeks ago`
                         }
                   }
+                  else{
+                        timePos = "ERROR"
+                  }
                   var tit = items[i].querySelectorAll("title")[0].innerHTML
                   var imag = items[i].querySelectorAll("enclosure")[0].getAttribute('url')
-                  $("#news>p.desc").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`)
+                  $("#news>p.desc").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`) 
             }
-            $("#news>p.desc").append(` <p class="m-0 UpD">Last updated <b>| <span>`+channel.querySelectorAll("pubDate")[0].innerHTML+`</span></b></p>`)
+            $("#news>p.desc").append(`<p class="mt-3 UpD">Last updated <b>| <span>`+channel.querySelectorAll("pubDate")[0].innerHTML+`</span></b></p>`)
        })
 }
 
@@ -357,13 +363,3 @@ $(this).popover('hide');
 $(document).on("click", ".art",  function(){
       $(".art").blur()
 })
-
-
-
-
-
-
-
-
-
-
