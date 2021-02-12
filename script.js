@@ -40,7 +40,7 @@ function picOfDay() {
 NEO()
 function NEO() {
       var today = new Date();
-      var dd = String(today.getDate()).padStart(2, '0');
+      var dd = String(today.getDate()).padStart(2, '0')
       var mm = String(today.getMonth() + 1).padStart(2, '0')
       var yyyy = today.getFullYear();
       today = `${yyyy}-${mm}-${dd}`;
@@ -83,7 +83,6 @@ function NEO() {
             var time = dayTime.toLocaleTimeString('en-US', { hour12: false, 
                   hour: "numeric", 
                   minute: "numeric"});
-            dayTime = time
             var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[startDate][i]["name"].substring(data[startDate][i]["name"].indexOf("(") + 1, data[startDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
