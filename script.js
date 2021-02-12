@@ -79,7 +79,8 @@ function NEO() {
       /*today loop*/
       for (var i =0; i < numTdy; i++){   
             var datstr = (data[startDate][i]["close_approach_data"][0]["close_approach_date_full"] + ":00").split(/[- :]/)
-            dayTime = new Date(datstr[0], datstr[1]-1, datstr[2], datstr[3], datstr[4], datstr[5])
+            console.log(datstr)
+            dayTime = new Date("1990", '1', '1', datstr[3], datstr[4], datstr[5])
             var time = dayTime.toLocaleTimeString('en-US', { hour12: false, 
                   hour: "numeric", 
                   minute: "numeric"});
