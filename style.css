@@ -32,7 +32,7 @@ h4,
 h5,
 h6{
 	font-size: 2.1vw;
-	line-height: 3.8vw;
+	line-height: 3.8vw
 }
 
 .imgTit, .card-title{
@@ -96,4 +96,109 @@ iframe {
   }
 #rockLoad {
 	position: absolute;
+}
+
+@media only screen and (max-width: 1060px) {
+	body {
+		font-size: 1.4vw;
+		line-height: 2.4vw;
+	}
+
+	h4,
+	h5,
+	h6{
+		font-size: 1.9vw;
+		line-height: 3.8vw;
+	}
+
+	.imgTit, .card-title{
+		font-size: 2.8vw;
+		line-height: 3vw;
+	}
+
+	.neoDateTime, .neoName{
+		margin:0;
+		line-height: auto;
+	}
+
+}
+
+@media only screen and (max-width: 767PX) {
+	body{
+		font-size: 3vw;
+		line-height: 4.5vw;
+	}
+	
+	
+	/*set font for headers and remove padding from bootstrap*/
+	
+	h1,
+	h2,
+	h3 {
+		font-size: 8vw;
+		line-height: 9vw;
+	}
+	
+	h4,
+	h5,
+	h6{
+		font-size: 4vw;
+		line-height: auto;
+	}
+	
+	.imgTit, .card-title{
+		font-size: 5vw;
+		line-height: auto;
+		
+	}
+	.dropMed, .dropdown-toggle, .coolKey, .artim {
+		font-size: 2vw;
+		line-height: 2.9vw;
+	}
+	
+	
+	.neoName, .neoInfoRight>div>p>b{
+		font-size: 7vw;
+		line-height: auto;
+	}
+	.neoDateTime, .neoName{
+		margin:0;
+		line-height: 7vw;
+	}
+	
+	
+	iframe {
+		width: 100vw; 
+		height: 25vw; 
+	}
+	
+	/*news*/
+	
+	.tit {
+		margin: auto 0;
+		line-height: 1.8vw;
+		font-size: 1.5vw;
+		letter-spacing: 0.05vw;
+	}
+	
+	.art>span>img {
+		border-radius: 50%;
+		width: 9.5vw;
+		height: 9.5vw;
+		object-fit: cover
+	}
+	
+	/*style rocket*/
+	.path {
+		width:200px;
+		height:100%;
+		position: fixed;
+		top: 0%;
+		left: 50%;
+		margin-left: -100px;
+		padding-top: 100vh
+	  }
+	#rockLoad {
+		position: absolute;
+	}
 }

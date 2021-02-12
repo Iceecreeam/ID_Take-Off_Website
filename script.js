@@ -13,7 +13,7 @@ function picOfDay() {
             $(".dayvid").attr("src",data["url"])
          }
          else if (data["media_type"] == "image"){
-            $("#photoDay>p.desc").append('<img class="col-12 p-md-5 p-2 pb-0 daypic" src="" alt="photoOfDay">')
+            $("#photoDay>p.desc").append('<img class="col-12 px-md-5 p-3 daypic" src="" alt="photoOfDay">')
             $(".daypic").attr("src",data["url"])
          }
          else{
@@ -183,8 +183,6 @@ function spaceyNews() {
          .then(response => response.text())
          .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
          .then(function(data){   
-            
-            
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
             $("#newsLoad").css("display", "none")
@@ -206,7 +204,7 @@ function spaceyNews() {
                   else if(diff > 3600000 && diff < 86400000){
                         var hours = (diff / (1000 * 60 * 60)).toFixed(0);
                         if (hours == 1){
-                              timePos = `${hour} hours ago`
+                              timePos = `${hours} hours ago`
                         }
                         else{
                               timePos = `${hours} hours ago`
