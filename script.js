@@ -133,7 +133,7 @@ function NEO() {
                   hour: "numeric", 
                   minute: "numeric"});
             
-            dayTime = time
+            dayTime = "placeholder"
             var link = data[endDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[endDate][i]["name"].substring(data[endDate][i]["name"].indexOf("(") + 1, data[endDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
