@@ -126,10 +126,13 @@ function NEO() {
 
       /*tomorrow loop*/
       for (var i =0; i < numTmr; i++){   
-            var dayTime = new Date(data[startDate][i]["close_approach_data"][0]["close_approach_date_full"])//Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
+            var datstr = (data[endDate][i]["close_approach_data"][0]["close_approach_date_full"] + ":00").split(/[- :]/)
+            console.log(datstr)
+            dayTime = new Date("1990", '1', '1', datstr[3], datstr[4], datstr[5])
             var time = dayTime.toLocaleTimeString('en-US', { hour12: false, 
                   hour: "numeric", 
                   minute: "numeric"});
+            
             dayTime = time
             var link = data[endDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[endDate][i]["name"].substring(data[endDate][i]["name"].indexOf("(") + 1, data[endDate][i]["name"].indexOf(")"))
