@@ -79,10 +79,12 @@ function NEO() {
       /*today loop*/
       for (var i =0; i < numTdy; i++){   
 
-            var dayTime = new Date(data[startDate][i]["close_approach_data"][0]["close_approach_date_full"])//Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
+            var dayTime = new Date((data[startDate][i]["close_approach_data"][0]["close_approach_date_full"]))//Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
             var time = dayTime.toLocaleTimeString('en-US', { hour12: false, 
                   hour: "numeric", 
                   minute: "numeric"});
+            
+            dayTime = iOS()
             var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[startDate][i]["name"].substring(data[startDate][i]["name"].indexOf("(") + 1, data[startDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
@@ -360,3 +362,17 @@ $(this).popover('hide');
 $(document).on("click", ".art",  function(){
       $(".art").blur()
 })
+
+/*detect ios*/
+function iOS() {
+      return [
+        'iPad Simulator',
+        'iPhone Simulator',
+        'iPod Simulator',
+        'iPad',
+        'iPhone',
+        'iPod'
+      ].includes(navigator.platform)
+      // iPad on iOS 13 detection
+      || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+    }
