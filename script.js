@@ -79,12 +79,15 @@ function NEO() {
       /*today loop*/
       for (var i =0; i < numTdy; i++){   
 
-            var dayTime = new Date((data[startDate][i]["close_approach_data"][0]["close_approach_date_full"]))//Change variable time in this format. ****CONVERT FROM UTC TO SGT***!!!!!!
+            var dayTime = new Date(data[startDate][i]["close_approach_data"][0]["close_approach_date_full"])
+            if(iOS()){
+                  dayTime = new Date(data[startDate][i]["close_approach_data"][0]["close_approach_date_full"].replace(' ', 'T'))
+            }
             var time = dayTime.toLocaleTimeString('en-US', { hour12: false, 
                   hour: "numeric", 
                   minute: "numeric"});
             
-            dayTime = iOS()
+            dayTime = time
             var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
             var name = data[startDate][i]["name"].substring(data[startDate][i]["name"].indexOf("(") + 1, data[startDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
@@ -363,7 +366,7 @@ $(document).on("click", ".art",  function(){
       $(".art").blur()
 })
 
-/*detect ios*/
+/*detect ios https://stackoverflow.com/a/9039885*/
 function iOS() {
       return [
         'iPad Simulator',
