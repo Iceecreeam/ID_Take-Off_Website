@@ -39,7 +39,7 @@ h6{
 	font-size: 2.5vw;
 	line-height: 2.5vw;
 }
-.dropMed, .dropdown-toggle, .coolKey, .artim {
+.dropMed, .dropdown-toggle, .coolKey, .artim{
 	font-size: 1.5vw;
 	line-height: 1.7vw;
 }
@@ -111,6 +111,12 @@ iframe {
 		line-height: 3.8vw;
 	}
 
+	.tit {
+		font-size: 1.5vw;
+		line-height: 1.8vw;
+		display: inline-block;
+	}
+
 	.imgTit, .card-title{
 		font-size: 2.8vw;
 		line-height: 3vw;
@@ -118,7 +124,6 @@ iframe {
 
 	.neoDateTime, .neoName{
 		margin:0;
-		line-height: auto;
 	}
 
 }
@@ -143,62 +148,74 @@ iframe {
 	h5,
 	h6{
 		font-size: 4vw;
-		line-height: auto;
 	}
 	
 	.imgTit, .card-title{
 		font-size: 5vw;
-		line-height: auto;
+		line-height: normal;
 		
 	}
-	.dropMed, .dropdown-toggle, .coolKey, .artim {
-		font-size: 2vw;
+	.dropMed, .dropdown-toggle, .coolKey{
+		font-size: 4vw;
 		line-height: 2.9vw;
 	}
-	
+
+	.artim{
+		font-size: 3.5vw;
+		line-height: 2vw;
+	}
 	
 	.neoName, .neoInfoRight>div>p>b{
-		font-size: 7vw;
-		line-height: auto;
+		font-size: 7.4vw;
 	}
 	.neoDateTime, .neoName{
-		margin:0;
 		line-height: 7vw;
 	}
 	
 	
 	iframe {
 		width: 100vw; 
-		height: 25vw; 
+		height: 50vw; 
 	}
 	
 	/*news*/
 	
 	.tit {
-		margin: auto 0;
-		line-height: 1.8vw;
-		font-size: 1.5vw;
-		letter-spacing: 0.05vw;
+		line-height: 4vw;
+		font-size: 3.8vw;
 	}
 	
 	.art>span>img {
-		border-radius: 50%;
-		width: 9.5vw;
-		height: 9.5vw;
-		object-fit: cover
+		width: 19vw;
+		height: 19vw;
+	}
+}
+
+@media only screen and (max-width: 420px) {
+	div.col-4.p-0>p.my-2{
+		font-size: 3.5vw;
+	}
+	.neoName, .neoInfoRight>div>p>b{
+		font-size: 10vw;
+	}
+}
+
+@media only screen and (max-width: 325px) {
+	body {
+		font-size: 3.6vw;
+		line-height: 5.2vw;
 	}
 	
-	/*style rocket*/
-	.path {
-		width:200px;
-		height:100%;
-		position: fixed;
-		top: 0%;
-		left: 50%;
-		margin-left: -100px;
-		padding-top: 100vh
-	  }
-	#rockLoad {
-		position: absolute;
+	h4,
+	h5,
+	h6{
+		font-size: 3.8vw;
+	}
+	.imgTit{
+		font-size: 7vw;
+	}
+
+	span#date{
+		font-size: 5.5vw;
 	}
 }
