@@ -118,7 +118,7 @@ function NEO() {
             else{
                   dis = parseFloat(dis).toFixed(0)
             } 
-            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SGT</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
 
       }
 
@@ -165,7 +165,7 @@ function NEO() {
             else{
                   dis = parseFloat(dis).toFixed(0)
             } 
-            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrw, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrw, ' + dayTime + ' SGT</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
 }
       $("#cometLoad").remove()
 
@@ -241,9 +241,12 @@ function spaceyNews() {
                   $("#news>p.desc").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-9 col-md-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-3 col-md-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`) 
             }
             var pubDate = channel.querySelectorAll("pubDate")[0].innerHTML
-            console.log(pubDate)
+            var pubDate1 = pubDate.split(",")
+            var newDate = new Date(pubDate1[1])
+            var newDate1 = newDate.toLocaleString();
+            console.log(newDate1)
             /*FORMAT PUBDATE HERE */
-            $("#news>p.desc").append(`<p class="mt-3 UpD">Last updated <b>| <span>`+pubDate+`</span></b></p>`)
+            $("#news>p.desc").append(`<p class="mt-3 UpD">Last updated <b>| <span>`+newDate1+`</span></b></p>`)
        })
 }
 
