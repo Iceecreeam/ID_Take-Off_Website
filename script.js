@@ -1,3 +1,14 @@
+/*localstorage check*/
+lsCheck()
+function lsCheck(){
+      var rocount = localStorage.getItem("rocount");
+      if (rocount == null){
+            rocount = 0;
+      }
+      localStorage.clear()
+      localStorage.rocount = rocount
+}
+
 
 /*load values into pic of day section*/
 picOfDay()
@@ -326,17 +337,47 @@ $(document).on("click", ".dropMed" , function() {
       
 })
 
+
+
+
+/*init rocket*/
+initRocket()
+function initRocket(){
+      var inter = (Math.random() * 1000000) + 120000
+      if(inter > 1000000){
+            inter -= 780000
+      }
+      var waitrock = setInterval(function() {
+            rockMove()
+            clearInterval(waitrock)
+            }, inter);
+}
+
 /*move rocket*/
-rockMove()
 function rockMove() {
-      var pos = 0;
-      var id = setInterval(frame, 10);
-      function frame() {
-        if (pos == 350) {
-          clearInterval(id);
-        } else {            
-              $(".path").css("padding-top",         parseFloat($(".path").css("padding-top").substr(0, $(".path").css("padding-top").length-2))     -3)
-        }
+      $(".path").html(`<lottie-player style="width:100%;margin-top:95vh;height: 110px;" id="rockLoad" src="https://assets10.lottiefiles.com/packages/lf20_nmdhzkop.json"  background="transparent"  speed="0.5"  loop  autoplay></lottie-player>`)
+
+
+      if(Math.random() < 0.2 ){
+            var moveRock = setInterval(function() {
+                  if (parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2)) - 1 > 0) {
+                        $("#rockLoad").css("margin-top", parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2)) - 1)
+                  }
+                  else{
+                        clearInterval(moveRock)
+                  }
+                  }, 0.5);
+      }
+      else{
+            var moveRock = setInterval(function() {
+                  $("#rockLoad").css("margin-top", parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2)) - 1)
+                  if (-(parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2))) > parseFloat($("#rockLoad").css("height").substr(0, $("#rockLoad").css("margin-top").length - 2))){                   
+                        initRocket()
+                        clearInterval(moveRock)
+                  }
+            
+            }, 0.5)
+
       }
 }
 
@@ -344,6 +385,16 @@ function rockMove() {
 /*if user clicks on rocket*/
 $(document).on("click", "#rockLoad" , function(){
    $(".path").html(`<lottie-player src="https://assets5.lottiefiles.com/packages/lf20_MVp95j.json"  background="transparent"  speed="1"  style="width:100%;height: 180px;" autoplay></lottie-player>`)
+   localStorage.rocount = parseInt(localStorage.rocount) + 1
+   if(parseInt(localStorage.rocount) % 2 == 100 || parseInt(localStorage.rocount) == 10 || parseInt(localStorage.rocount) == 25 || parseInt(localStorage.rocount) == 50){
+         console.log("hello")
+   }
+
+   var waitstar = setInterval(function() {
+      initRocket()
+      clearInterval(waitstar)
+      }, 3000);
+
 })
 
 
