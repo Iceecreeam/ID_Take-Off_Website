@@ -389,14 +389,17 @@ function rockMove() {
 $(document).on("click", "#rockLoad" , function(){
    $(".path").html(`<lottie-player src="https://assets5.lottiefiles.com/packages/lf20_MVp95j.json"  background="transparent"  speed="1"  style="width:100%;height: 180px;" autoplay></lottie-player>`)
    localStorage.rocount = parseInt(localStorage.rocount) + 1
-   if(parseInt(localStorage.rocount) % 2 == 100 || parseInt(localStorage.rocount) == 10 || parseInt(localStorage.rocount) == 25 || parseInt(localStorage.rocount) == 50){
-         console.log("hello")
-   }
+
 
    var waitstar = setInterval(function() {
-      initRocket()
-      clearInterval(waitstar)
-      }, 3000);
+      $(".path").html(`<h1 style="width: 100%;margin-top: 45vh;font-size: 100px;-webkit-text-stroke-width: 1px;-webkit-text-stroke-color: white;">`+localStorage.rocount+`</h1>`)
+      var waitnum = setInterval(function() {
+            $(".path").html("")
+            initRocket()
+            clearInterval(waitnum)
+            clearInterval(waitstar)
+            }, 900); 
+      }, 1200);
 
 })
 
