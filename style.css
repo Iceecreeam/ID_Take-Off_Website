@@ -1,5 +1,5 @@
 body{
-	background-color: #cccccc;
+	background-color: #080505;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 1.1vw;
 	line-height: 1.9vw;
@@ -7,13 +7,18 @@ body{
 	margin: 0;
 }
 
+.titleLogo{
+    filter: invert(100%);
+}
+
+
 /*remove focus outline*/
 input:focus, button:focus, .btn:focus, textarea:focus, select:focus, audio:focus, .coolKey:focus{
 	outline: none;
 	border: 0;
 	color: #000000;
 	box-shadow: none;
-    filter: invert(70%);
+    filter: invert(40%);
 }
 
 
@@ -92,7 +97,7 @@ iframe {
 	top: 0%;
 	left: 50%;
 	margin-left: -100px;
-	padding-top: 100vh
+	padding-top: 0
   }
 #rockLoad {
 	position: absolute;
