@@ -127,6 +127,8 @@ input[type="color" i] {
 	box-shadow: none !important;
 }
 
+
+
 @media only screen and (max-width: 1060px) {
 	body {
 		font-size: 1.4vw;
