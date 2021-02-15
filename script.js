@@ -129,7 +129,7 @@ function NEO() {
             else{
                   dis = parseFloat(dis).toFixed(0)
             } 
-            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SGT</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
 
       }
 
@@ -255,8 +255,6 @@ function spaceyNews() {
             var pubDate1 = pubDate.split(",")
             var newDate = new Date(pubDate1[1])
             var newDate1 = newDate.toLocaleString();
-            console.log(newDate1)
-            /*FORMAT PUBDATE HERE */
             $("#news>p.desc").append(`<p class="mt-3 UpD">Last updated <b>| <span>`+newDate1+`</span></b></p>`)
        })
 }
@@ -423,4 +421,18 @@ $(this).popover('hide');
 $(document).on("click", ".art",  function(){
       $(".art").blur()
 })
+
+$(document).on("click", `.colour>input`,  function(){
+      $(`.colour>input`).blur()
+})
+
+
+
+$("#colour").on("input", function() {
+      var mainco = document.getElementById("colour").value.substring(1);
+      console.log(mainco);
+      document.body.style.backgroundColor = '#' + mainco
+      var invco = (Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()
+      $(`.colour>input`).css("background-color", '#' + invco)
+  });
 

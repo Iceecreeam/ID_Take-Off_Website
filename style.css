@@ -103,6 +103,30 @@ iframe {
 	position: absolute;
 }
 
+
+
+
+input[type="color" i] {
+    appearance: auto;
+    background-color: #fff;
+    border-style: none;
+    border-image: none;
+    padding: 7px;
+	height: 60px;
+	width: 60px;
+	text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    position: fixed;
+    margin-right: 3vw;
+    margin-bottom: 2vw;
+    bottom: 0;
+    right: 0;
+	outline: none;
+
+	box-shadow: none !important;
+}
+
 @media only screen and (max-width: 1060px) {
 	body {
 		font-size: 1.4vw;
@@ -137,6 +161,11 @@ iframe {
 	body{
 		font-size: 3vw;
 		line-height: 4.5vw;
+	}
+	input[type="color" i]{
+		padding: 3px;
+		height: 40px;
+		width: 40px;
 	}
 	
 	
