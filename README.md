@@ -122,4 +122,4 @@ Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()
 
 ### Acknowledgements
 
-- I received inspiration for this project from Reddit, space and its grandeur and scale.
+- I received inspiration for this project from Reddit, space, and their grandeur and scale.
