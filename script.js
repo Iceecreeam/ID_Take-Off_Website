@@ -6,7 +6,7 @@ function lsCheck(){
       if (rocount == null){
             rocount = 0;
       }
-      if (localStorage.getItem("mainco") == null){
+      if (localStorage.getItem("mainco") == null || iOS()){
             
             document.getElementById("colour").value =  "#" + Math.floor(Math.random()*(900000)+100000);
       }
