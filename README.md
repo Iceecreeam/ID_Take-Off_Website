@@ -1,49 +1,76 @@
-//credit these links
-https://lottiefiles.com/web-player?lottie_url=https%3A%2F%2Fassets5.lottiefiles.com%2Fpackages%2Flf20_XWP6mV.json ||
-https://lottiefiles.com/5040-shooting-star
-https://lottiefiles.com/20301-newspaper-open
+# Take-Off
 
-#**Take-Off**
 Our website aims to provide a entertaining and interesting experiences to the user regarding the topic of "Space". Our website is a kid friendly and in a sense a hub world for people to access new and exciting information regarding Space. We made this possible by intergarting NASA's API into our website, allowing for 1 click access to many interesting articles and news regarding Space. So come on! The planetary soup is stirring, what will you discover?
 
 
+## Design Process
 
-##Design Process
-Provide us insights about your design process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
+This project is for those in the general public who have an interest in space but not to the point of understanding the technical jargon. The design is simplistic and takes the data that is the flashiest and most-likely to arouse interest. This way, non-space buffs can get a taste of space (information about incoming asteroids, space news) and those who already know about space can enjoy the daily media chosen by NASA or generate something cool about space.
 
-In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
+The project's is achieved since it is an easily accessible website, with all the information on one page, and can be used across browsers.
 
-As a user type, I want to perform an action, so that I can achieve a goal.
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included as a pdf file in the project itself (in an separate directory) Include the Adobe XD wireframe as a folder. You can include the XD share url.
+- As a space-obsessed person who knows a lot about space, I want to have more exposure to cool things about space.
+- As someone who does not know a lot about space but wants to know some exciting information about space, I want to have some facts that serves as a conversation topic.
 
-##Features
-There are a few features.
+## Features
+
 1. **Media of the Day**
-This feature spits out a new article based on the NASA's API, it updates daily so users can check back everyday to read a new and exciting article reagrding the secrets of the cosmos.
-The article updates daily and automatically based on the API given by NASA. No user input is required.
+API included| https://github.com/nasa/apod-api
+
+This feature is the top left tile that shows the daily photo/video based on the NASA's API, it updates daily so users can check back everyday to read a new and exciting article reagrding the secrets of the cosmos.
+The information included includes the actual photo/video, a title, the date that NASA has allocated it to, the copyright holders if applicable and a description of the media.
+The media is chosen by NASA so it would be visually appealing and exciting from the biggest space nerd to the common man.
 2. **NEO Astroid feature**
-This feature shows all the current near earth objects floating around the earth, which one will exterminate us? The Name,diameter,velocity and distance from earth are all listed and taken directly from NASA's API, users interested in this field will be able to get live statictics updated daily regarding near earth objects.
+This feature shows up to 4 of the current near earth objects each from the current and next day floating around the earth? The Name, diameter, velocity and distance from earth are all listed and taken directly from NASA's API, users interested in this field will be able to get live statictics updated daily regarding near earth objects.
+Clicking on each aesteroid's name would bring the user to the aesteroid's profile on the jet propulsion laboratory's website. 
+This tile takes the desirable, updated information from NASA's API and displays it in a simple way.
 3. **Something cool?**
-Li MIn u need to fill this up cuz i have no idea LMFAO
+The 
 4. **Spacey News**
 News articles posted on Space.com will be shown here, allowing for articles to be constantly updated. Users interested in a certain article will be able to click and access the full article at its original source, our website in a sense will be acting as a hub world where many articles are published with fascinating stories, the user will be able to easily navigate through the articles and pick ones that they enjoy the most.
 
+ 
+### Existing Features
+- Feature 1 - allows users X to achieve Y, by having them fill out Z
+- ...
+
+In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
+
+### Features Left to Implement
+- Another feature idea
+
+## Technologies Used
+
+In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
+
+- [JQuery](https://jquery.com)
+    - The project uses **JQuery** to simplify DOM manipulation.
 
 
-##JQuery
-The project uses JQuery to simplify DOM manipulation.
-Jquery is used to fetch and manipulate the data provided by the API of NASA and space.com.
+## Testing
 
+For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
 
+1. Contact form:
+    1. Go to the "Contact Us" page
+    2. Try to submit the empty form and verify that an error message about the required fields appears
+    3. Try to submit the form with an invalid email address and verify that a relevant error message appears
+    4. Try to submit the form with all inputs valid and verify that a success message appears.
 
+In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
 
+You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
 
-##Credits
-###Content
-Data taken from NASA API and space.com
-Media
-The photos used in this site were obtained from https://lottiefiles.com/web-player?lottie_url=https%3A%2F%2Fassets5.lottiefiles.com%2Fpackages%2Flf20_XWP6mV.json
-https://lottiefiles.com/5040-shooting-star
-https://lottiefiles.com/20301-newspaper-open
-Acknowledgements
-I received inspiration for this project from X
+If this section grows too long, you may want to split it off into a separate file and link to it from here.
+
+## Credits
+
+### Content
+- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
+
+### Media
+- The photos used in this site were obtained from ...
+
+### Acknowledgements
+
+- I received inspiration for this project from X
