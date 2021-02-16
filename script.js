@@ -2,11 +2,18 @@
 lsCheck()
 function lsCheck(){
       var rocount = localStorage.getItem("rocount");
+      document.getElementById("colour").value = "#" + localStorage.getItem("mainco");
       if (rocount == null){
             rocount = 0;
       }
+      if (document.getElementById("colour").value == null){
+            
+            document.getElementById("colour").value =  "#" + Math.floor(Math.random()*(900000)+100000);
+      }
       localStorage.clear()
+      localStorage.mainco = document.getElementById("colour").value.substring(1);
       localStorage.rocount = rocount
+      changecolour()
 }
 
 
@@ -19,15 +26,15 @@ function picOfDay() {
          .then(function(data){
          /*modify json for use*/
          if(data["media_type"] == "video"){
-            $("#photoDay>p.desc").append('<iframe class="col-12 pt-4 dayvid" src="" frameBorder="0"></iframe>')
+            $("#media").append('<iframe class="col-12 pt-4 dayvid" src="" frameBorder="0"></iframe>')
             $(".dayvid").attr("src",data["url"])
          }
          else if (data["media_type"] == "image"){
-            $("#photoDay>p.desc").append('<img class="col-12 px-md-5 p-3 daypic" src="" alt="photoOfDay">')
+            $("#media").append('<img class="col-12 px-md-5 p-3 daypic" src="" alt="photoOfDay">')
             $(".daypic").attr("src",data["url"])
          }
          else{
-            $("#photoDay>p.desc").append('<br>It seems like this media type is unsupported.')
+            $("#media").append('<br>It seems like this media type is unsupported.')
          }
 
          $(".imgTit>b").text(data["title"])
@@ -129,7 +136,7 @@ function NEO() {
             else{
                   dis = parseFloat(dis).toFixed(0)
             } 
-            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName" style="color: #'+(Number(`0x1${document.getElementById("colour").value.substring(1)}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()+'"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
 
       }
 
@@ -176,12 +183,14 @@ function NEO() {
             else{
                   dis = parseFloat(dis).toFixed(0)
             } 
-            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrw, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
-}
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrw, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName" style="color: #'+(Number(`0x1${document.getElementById("colour").value.substring(1)}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()+'"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
+      }
       $("#cometLoad").remove()
 
-      $("#neo>p").append(addString)
+      $("#neoEnt").append(addString)
       })
+
+      
 }
 
 /*load values into spacey news section*/
@@ -249,13 +258,15 @@ function spaceyNews() {
                   }
                   var tit = items[i].querySelectorAll("title")[0].innerHTML
                   var imag = items[i].querySelectorAll("enclosure")[0].getAttribute('url')
-                  $("#news>p.desc").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-9 col-md-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-3 col-md-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`) 
+                  $("#newsEnt").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-9 col-md-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim" style="color: #`+(Number(`0x1${document.getElementById("colour").value.substring(1)}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()+` "> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-3 col-md-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`) 
             }
             var pubDate = channel.querySelectorAll("pubDate")[0].innerHTML
             var pubDate1 = pubDate.split(",")
             var newDate = new Date(pubDate1[1])
             var newDate1 = newDate.toLocaleString();
-            $("#news>p.desc").append(`<p class="mt-3 UpD">Last updated <b>| <span>`+newDate1+`</span></b></p>`)
+            $("#newsEnt").append(`<p class="mt-3 UpD">Last updated <b>| <span>`+newDate1+`</span></b></p>`)
+            
+            
        })
 }
 
@@ -388,9 +399,10 @@ $(document).on("click", "#rockLoad" , function(){
    $(".path").html(`<lottie-player src="https://assets5.lottiefiles.com/packages/lf20_MVp95j.json"  background="transparent"  speed="1"  style="width:100%;height: 180px;" autoplay></lottie-player>`)
    localStorage.rocount = parseInt(localStorage.rocount) + 1
 
-
+   var mainco = document.getElementById("colour").value.substring(1);
+   var invco = (Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()
    var waitstar = setInterval(function() {
-      $(".path").html(`<h1 style="width: 100%;margin-top: 45vh;font-size: 100px;-webkit-text-stroke-width: 1px;-webkit-text-stroke-color: white;">`+localStorage.rocount+`</h1>`)
+      $(".path").html(`<h1 style="width: 100%;margin-top: 45vh;font-size: 100px;-webkit-text-stroke-width: 1px;-webkit-text-stroke-color: `+"#"+invco+`;">`+localStorage.rocount+`</h1>`)
       var waitnum = setInterval(function() {
             $(".path").html("")
             initRocket()
@@ -428,15 +440,18 @@ $(document).on("click", `.colour>input`,  function(){
 
 
 
-$("#colour").on("input", function() {
+
+
+function changecolour() {
       var mainco = document.getElementById("colour").value.substring(1);
+      localStorage.mainco = mainco
       document.body.style.backgroundColor = '#' + mainco
       var invco = (Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()
       $(`.colour>input`).css("background-color", '#' + invco)
-      $(`.colour>input`).css("background-color", '#' + invco)
-      $(".neoName>b").css("color", '#' + invco)
-      $("#cors").css("color", '#' + invco)
-      $(".path").css("color", '#' + invco)
+      $(".path,.artim,a").css("color", '#' + invco)
+      $(".tile").css("border", "solid #"+ invco)
+      $("#main").css("border", "none")
+
 
       
       r =  parseFloat(mainco.substr(0,2));
@@ -449,12 +464,15 @@ $("#colour").on("input", function() {
                   count++
             }
       }
-      if(count<3){
-            console.log("dark " + mainco)
+      if(count<2){
             $(`.titleLogo`).css("filter", "invert(100%)")
       }
       else{
             
             $(`.titleLogo`).css("filter", "invert(0%)")
       }
+}
+
+$("#colour").on("input", function(){
+      changecolour()
 });
