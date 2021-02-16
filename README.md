@@ -101,7 +101,7 @@ A rocket would appear occasionally and either stay at the top of the screen or e
 - All regex was done with the help of [regex101](https://regex101.com/)
 - [This](https://stackoverflow.com/a/54569758) was the reference for any instance of:
 ```ruby
-|inverts hex (variable mainco)|
+/*inverts hex (variable mainco)*/
 Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase() 
 ```
 
