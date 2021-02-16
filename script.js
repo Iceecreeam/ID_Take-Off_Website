@@ -361,7 +361,6 @@ function initRocket(){
       if(inter > 1000000){
             inter -= 780000
       }
-      inter = 10000
       var waitrock = setInterval(function() {
             rockMove()
             clearInterval(waitrock)
