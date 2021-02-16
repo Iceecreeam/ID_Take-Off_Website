@@ -7,7 +7,7 @@ function lsCheck(){
       }
       if (localStorage.getItem("mainco") == null){
             
-            document.getElementById("colour").value =  "#" + Math.floor(Math.random()*(900000)+100000);
+            document.getElementById("colour").value =  "#" + Math.floor(Math.random()*16777215).toString(16);
       }
       else{
             document.getElementById("colour").value = "#" + localStorage.getItem("mainco");
