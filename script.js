@@ -67,8 +67,8 @@ function NEO() {
       var yyyy = tmr.getFullYear();
       tmr = `${yyyy}-${mm}-${dd}`;
       
-      var startDate = today /*get todays date*/
-      var endDate = tmr /*get tomorrow's date*/
+      var startDate = today 
+      var endDate = tmr 
 
 
       fetch("https://api.nasa.gov/neo/rest/v1/feed?start_date=" + startDate + "&end_date=" + endDate + "&api_key=0kDrOBtIYM2fhZoVrtf80AaSIzg4Tb7PPSeJ1bfu")
@@ -89,7 +89,7 @@ function NEO() {
       }
             
 
-      var addString = "" /*string that well add to the html code */
+      var addString = ""
 
 
 
@@ -102,7 +102,7 @@ function NEO() {
                   minute: "numeric"});
             
             dayTime = time
-            var link = data[startDate][i]["nasa_jpl_url"] //nasa_jpl_url
+            var link = data[startDate][i]["nasa_jpl_url"] 
             var name = data[startDate][i]["name"].substring(data[startDate][i]["name"].indexOf("(") + 1, data[startDate][i]["name"].indexOf(")"))
             var diamin =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
             var diamax =  parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_max"])
@@ -136,7 +136,7 @@ function NEO() {
             else{
                   dis = parseFloat(dis).toFixed(0)
             } 
-            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName" style="color: #'+(Number(`0x1${document.getElementById("colour").value.substring(1)}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()+'"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName" style="color: #'+(Number(`0x1${document.getElementById("colour").value.substring(1)}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()+'"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Mkm<p> </div> </div> </div>'
 
       }
 
@@ -183,7 +183,7 @@ function NEO() {
             else{
                   dis = parseFloat(dis).toFixed(0)
             } 
-            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrw, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName" style="color: #'+(Number(`0x1${document.getElementById("colour").value.substring(1)}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()+'"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Gkm<p> </div> </div> </div>'
+            addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrw, ' + dayTime + ' SG</h4> <a href="'+link+'" target="_blank" class="neoName" style="color: #'+(Number(`0x1${document.getElementById("colour").value.substring(1)}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()+'"><b>'+name+'</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>'+dia+'</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>'+ vel +'</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>'+dis+'</b> Mkm<p> </div> </div> </div>'
       }
       $("#cometLoad").remove()
 
@@ -434,13 +434,6 @@ $(document).on("click", ".art",  function(){
       $(".art").blur()
 })
 
-$(document).on("click", `.colour>input`,  function(){
-      $(`.colour>input`).blur()
-})
-
-
-
-
 
 function changecolour() {
       var mainco = document.getElementById("colour").value.substring(1);
@@ -450,7 +443,7 @@ function changecolour() {
       $(`.colour>input`).css("background-color", '#' + invco)
       $(".path,.artim,a").css("color", '#' + invco)
       $(".tile").css("border", "solid #"+ invco)
-      $("p.desc").css("border-bottom", "solid #"+ invco +" 0.25px")
+      $("p.desc").css("border-bottom", "solid #"+ invco +" 2px")
       $("span#date").css("border-top", "solid #"+ invco +" 0.25px")
       $("#main").css("border", "none")
 
@@ -478,3 +471,17 @@ function changecolour() {
 $("#colour").on("input", function(){
       changecolour()
 });
+
+/*detect ios https://stackoverflow.com/a/9039885*/
+function iOS() {
+      return [
+        'iPad Simulator',
+        'iPhone Simulator',
+        'iPod Simulator',
+        'iPad',
+        'iPhone',
+        'iPod'
+      ].includes(navigator.platform)
+      // iPad on iOS 13 detection
+      || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+    }
