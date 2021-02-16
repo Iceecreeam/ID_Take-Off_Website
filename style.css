@@ -13,7 +13,7 @@ body{
 
 
 /*remove focus outline*/
-input:focus, button:focus, .btn:focus, textarea:focus, select:focus, audio:focus, .coolKey:focus{
+button:focus, .btn:focus, textarea:focus, select:focus, audio:focus, .coolKey:focus{
 	outline: none;
 	border: 0;
 	color: #000000;
@@ -43,6 +43,8 @@ h6{
 p.desc{
 	padding-bottom: 1.5vh;
 	margin-bottom: 2vh;
+	
+
 }
 
 .imgTit, .card-title{
@@ -167,7 +169,7 @@ input[type="color" i] {
 
 }
 
-@media only screen and (max-width: 767PX) {
+@media only screen and (max-width: 768PX) {
 	body{
 		font-size: 3vw;
 		line-height: 4.5vw;
