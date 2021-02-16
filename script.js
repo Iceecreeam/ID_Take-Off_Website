@@ -426,7 +426,7 @@ $(document).on("click", "#rockLoad" , function(){
 /*Modify popover settings*/
 $(document).on("mouseenter", ".art", function() {
 $('[data-toggle="popover"]').popover({
-      placement : 'top',
+      placement : 'left',
       });
       $(this).popover('show');
 });
@@ -446,13 +446,17 @@ function changecolour() {
       localStorage.mainco = mainco
       document.body.style.backgroundColor = '#' + mainco
       var invco = (Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()
+      
+      $(".tile,.dropdown-toggle").css("border", "solid #"+ invco)
+      $(".card-img-top").css("background-color", '#' + mainco)
       $(".path").css("color", '#' + mainco)
       $(`.colour>input`).css("background-color", '#' + invco)
       $(".artim,a").css("color", '#' + invco)
-      $(".tile").css("border", "solid #"+ invco)
       $("p.desc").css("border-bottom", "solid #"+ invco +" 2px")
       $("span#date").css("border-top", "solid #"+ invco +" 0.25px")
       $("#main").css("border", "none")
+      $(".dropdown-toggle").css("border-left", "none")
+      $(".dropdown-toggle").css("border-top", "none")
 
 
       

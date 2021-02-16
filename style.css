@@ -1,5 +1,4 @@
 body{
-	background-color: #080505;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 1.1vw;
 	line-height: 1.9vw;
@@ -118,7 +117,6 @@ iframe {
 
 input[type="color" i] {
     appearance: auto;
-    background-color: #fff;
     border-style: none;
     border-image: none;
     padding: 7px;
