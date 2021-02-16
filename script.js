@@ -6,7 +6,7 @@ function lsCheck(){
       if (rocount == null){
             rocount = 0;
       }
-      if (document.getElementById("colour").value == null){
+      if (localStorage.getItem("mainco") == null){
             
             document.getElementById("colour").value =  "#" + Math.floor(Math.random()*(900000)+100000);
       }
@@ -450,6 +450,8 @@ function changecolour() {
       $(`.colour>input`).css("background-color", '#' + invco)
       $(".path,.artim,a").css("color", '#' + invco)
       $(".tile").css("border", "solid #"+ invco)
+      $("p.desc").css("border-bottom", "solid #"+ invco +" 0.25px")
+      $("span#date").css("border-top", "solid #"+ invco +" 0.25px")
       $("#main").css("border", "none")
 
 
