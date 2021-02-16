@@ -1,14 +1,16 @@
 /*localstorage check*/
 lsCheck()
 function lsCheck(){
-      var rocount = localStorage.getItem("rocount");
-      document.getElementById("colour").value = "#" + localStorage.getItem("mainco");
+       var rocount = localStorage.getItem("rocount");
       if (rocount == null){
             rocount = 0;
       }
       if (localStorage.getItem("mainco") == null){
             
             document.getElementById("colour").value =  "#" + Math.floor(Math.random()*(900000)+100000);
+      }
+      else{
+            document.getElementById("colour").value = "#" + localStorage.getItem("mainco");
       }
       localStorage.clear()
       localStorage.mainco = document.getElementById("colour").value.substring(1);
@@ -359,6 +361,7 @@ function initRocket(){
       if(inter > 1000000){
             inter -= 780000
       }
+      inter = 10000
       var waitrock = setInterval(function() {
             rockMove()
             clearInterval(waitrock)
@@ -372,22 +375,25 @@ function rockMove() {
 
       if(Math.random() < 0.2 ){
             var moveRock = setInterval(function() {
-                  if (parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2)) - 1 > 0) {
-                        $("#rockLoad").css("margin-top", parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2)) - 1)
-                  }
-                  else{
-                        clearInterval(moveRock)
-                  }
+                     if($("#rockLoad").length > 0){
+                        if (parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2)) - 1 > 0) {
+                              $("#rockLoad").css("margin-top", parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2)) - 1)
+                        }
+                        else{
+                              clearInterval(moveRock)
+                        }
+                     }
                   }, 0.5);
       }
       else{
             var moveRock = setInterval(function() {
-                  $("#rockLoad").css("margin-top", parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2)) - 1)
-                  if (-(parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2))) > parseFloat($("#rockLoad").css("height").substr(0, $("#rockLoad").css("margin-top").length - 2))){                   
-                        initRocket()
-                        clearInterval(moveRock)
+                  if($("#rockLoad").length > 0){
+                        $("#rockLoad").css("margin-top", parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2)) - 1)
+                        if (-(parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2))) > parseFloat($("#rockLoad").css("height").substr(0, $("#rockLoad").css("margin-top").length - 2))){                   
+                              initRocket()
+                              clearInterval(moveRock)
+                        }
                   }
-            
             }, 0.5)
 
       }
@@ -396,13 +402,14 @@ function rockMove() {
 
 /*if user clicks on rocket*/
 $(document).on("click", "#rockLoad" , function(){
+      
    $(".path").html(`<lottie-player src="https://assets5.lottiefiles.com/packages/lf20_MVp95j.json"  background="transparent"  speed="1"  style="width:100%;height: 180px;" autoplay></lottie-player>`)
    localStorage.rocount = parseInt(localStorage.rocount) + 1
 
    var mainco = document.getElementById("colour").value.substring(1);
    var invco = (Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()
    var waitstar = setInterval(function() {
-      $(".path").html(`<h1 style="width: 100%;margin-top: 45vh;font-size: 100px;-webkit-text-stroke-width: 1px;-webkit-text-stroke-color: `+"#"+invco+`;">`+localStorage.rocount+`</h1>`)
+      $(".path").html(`<h1 style="width: 100%;margin-top: 45vh;font-size: 100px;-webkit-text-stroke-width: 3px;-webkit-text-stroke-color: `+" #"+invco+`;">`+localStorage.rocount+`</h1>`)
       var waitnum = setInterval(function() {
             $(".path").html("")
             initRocket()
@@ -440,8 +447,9 @@ function changecolour() {
       localStorage.mainco = mainco
       document.body.style.backgroundColor = '#' + mainco
       var invco = (Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()
+      $(".path").css("color", '#' + mainco)
       $(`.colour>input`).css("background-color", '#' + invco)
-      $(".path,.artim,a").css("color", '#' + invco)
+      $(".artim,a").css("color", '#' + invco)
       $(".tile").css("border", "solid #"+ invco)
       $("p.desc").css("border-bottom", "solid #"+ invco +" 2px")
       $("span#date").css("border-top", "solid #"+ invco +" 0.25px")
