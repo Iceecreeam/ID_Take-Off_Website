@@ -217,7 +217,7 @@ function spaceyNews() {
                   else if(diff > 3600000 && diff < 86400000){
                         var hours = (diff / (1000 * 60 * 60)).toFixed(0);
                         if (hours == 1){
-                              timePos = `${hours} hours ago`
+                              timePos = `${hour} hours ago`
                         }
                         else{
                               timePos = `${hours} hours ago`
@@ -227,7 +227,7 @@ function spaceyNews() {
                   else if(diff >= 86400000 && diff < 604800000 ){
                         var days = (diff / (1000 * 60 * 60 * 24)).toFixed(0);
                         if (hours == 1){
-                              timePos = `${days} day ago`
+                              timePos = `${day} day ago`
                         }
                         else{
                               timePos = `${days} days ago`
