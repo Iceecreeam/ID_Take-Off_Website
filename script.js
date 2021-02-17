@@ -343,7 +343,6 @@ initRocket()
 function initRocket() {
     var inter = (Math.random() * 1000000) + 120000
     if (inter > 1000000) {
-        inter -= 780000
     }
     var waitrock = setInterval(function() {
         rockMove()
