@@ -1,5 +1,4 @@
 body{
-	background-color: #080505;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 1.1vw;
 	line-height: 1.9vw;
@@ -13,7 +12,7 @@ body{
 
 
 /*remove focus outline*/
-input:focus, button:focus, .btn:focus, textarea:focus, select:focus, audio:focus, .coolKey:focus{
+button:focus, .btn:focus, textarea:focus, select:focus, audio:focus, .coolKey:focus{
 	outline: none;
 	border: 0;
 	color: #000000;
@@ -38,6 +37,13 @@ h5,
 h6{
 	font-size: 2.1vw;
 	line-height: 3.8vw
+}
+
+p.desc{
+	padding-bottom: 1.5vh;
+	margin-bottom: 2vh;
+	
+
 }
 
 .imgTit, .card-title{
@@ -67,6 +73,9 @@ h6{
 	line-height: 3vw;
 }
 
+#media{
+	margin-bottom: 4.5vh;
+}
 
 iframe {
     width: 100vw; 
@@ -103,6 +112,31 @@ iframe {
 	position: absolute;
 }
 
+
+
+
+input[type="color" i] {
+    appearance: auto;
+    border-style: none;
+    border-image: none;
+    padding: 7px;
+	height: 60px;
+	width: 60px;
+	text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    position: fixed;
+    margin-right: 3vw;
+    margin-bottom: 2vw;
+    bottom: 0;
+    right: 0;
+	outline: none;
+
+	box-shadow: none !important;
+}
+
+
+
 @media only screen and (max-width: 1060px) {
 	body {
 		font-size: 1.4vw;
@@ -133,10 +167,15 @@ iframe {
 
 }
 
-@media only screen and (max-width: 767PX) {
+@media only screen and (max-width: 768PX) {
 	body{
 		font-size: 3vw;
 		line-height: 4.5vw;
+	}
+	input[type="color" i]{
+		padding: 3px;
+		height: 40px;
+		width: 40px;
 	}
 	
 	
