@@ -12,6 +12,9 @@ The project's aim is achieved since it is an easily accessible website, with all
 - As a space-obsessed person who knows a lot about space, I want to have more exposure to cool things about space.
 - As someone who does not know a lot about space but wants to know some exciting space information, I want to have some facts that serves as a conversation topic.
 
+![Wireframe](https://user-images.githubusercontent.com/72980567/108165433-8728d800-712d-11eb-8855-9899800dfdf0.png)
+Low-fidelity wireframe made at the beginning of the project
+
 ## Features
 
 1. **Media of the Day**
