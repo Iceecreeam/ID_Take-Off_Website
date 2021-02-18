@@ -93,14 +93,20 @@ A rocket would appear occasionally and either stay at the top of the screen or e
     2. User enters something that has no entries/selects a media type that has no entries for that keyword, error message appears
     3. User enters appropriate keyword and selects media type, which yields results that are displayed in the tile
 
-3. Website on different devices :
+3. Spacey News:
+    1. User notices error in loading news (astronaut lottie)
+    2. User clicks on hyperlinked element below astronaut and get access to the server and reloads website
+    3. News loads successfully
+
+4. Website on different devices :
     1. The website looks similar on all browsers. The biggest difference is that the website shows tiles in 2 columns on larger screens and shows tiles in 1 column on mobile for visibility. Smaller changes such as font sizes, margins, and padding have also been done.
     2. Input types such as the text for the something cool tile and the colour picker would loook different based on the device/browser.
 
-4. Interesting bugs:
+5. Interesting bugs:
     1. A lot of the issues had to do with how dynamically applied styling would not work on dynamically created elements (fadein, fadeout, popover, etc.). Most of the time adding the styling at the same time as creating the elements helped.
     2. Downloaded and locally stored JSONs didnt work for lottie after restarting my laptop and externakky linking to lottie files was the solution.
     3. There were many bugs that had to do with the appearing rocket, especially with how some rockets would suddenly accelerate/deccelerate despite the fixed intervals/distance. At the moment, it adds to the stylistic quality of the rocket.
+    4. The stars on the loading lottie animation for something cool do not load/take a long time to load sometimes (especially on mobile), leaving only the rocket and the planet there
 
 
 ## Credits
