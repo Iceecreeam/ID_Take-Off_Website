@@ -77,7 +77,7 @@ function NEO() {
         .then(response => response.json())
         .then(data => data["near_earth_objects"])
         .then(function(data) {
-
+            
             $(".neoInfo").remove() /*removes placeholder code */
 
             var numTdy = 4
@@ -200,6 +200,10 @@ function spaceyNews() {
         .then(response => response.text())
         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
         .then(function(data) {
+            if(data.querySelectorAll("channel").length==0){
+                console.log("a")
+                return;
+            }
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
             $("#newsLoad").css("display", "none")
