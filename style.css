@@ -239,6 +239,9 @@ input[type="color" i] {
 	div.col-4.p-0>p.my-2{
 		font-size: 3.5vw;
 	}
+	.neoDateTime{
+		font-size: 3.7vw;
+	}
 	.neoName, .neoInfoRight>div>p>b{
 		font-size: 10vw;
 	}

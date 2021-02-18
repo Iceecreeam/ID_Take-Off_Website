@@ -1,3 +1,6 @@
+## Pitch video
+[ID_Take-Off_pitch.mp4](https://drive.google.com/file/d/1pLc64Ccfh3FC_6BpYfzlYHs1P-Qa0-79/view?usp=sharing)
+
 # Take-Off
 
 Our website aims to provide a entertaining and interesting experience to the user regarding the topic of "Space". Our website is a kid friendly and in a sense a hub world for people to access new and exciting information regarding Space. We made this possible by intergarting NASA's API into our website, allowing for 1 click access to many interesting articles and news regarding space. So come on! The planetary soup is stirring, what will you discover?
@@ -61,6 +64,7 @@ A rocket would appear occasionally and either stay at the top of the screen or e
 - More theming/decor/customisation ideas
 - reordering the tiles
 - Implementation of APIs from other sources ([example](http://open-notify.org/Open-Notify-API/People-In-Space/))
+- Support of different time zones
 
 ## Technologies Used
 
