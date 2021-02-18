@@ -59,7 +59,7 @@ NEO()
 
 function NEO() {
     var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0')
+    var dd = String(today.getDate()).padStart(2, '0') //chunk of code taken and edited from stackoverflow
     var mm = String(today.getMonth() + 1).padStart(2, '0')
     var yyyy = today.getFullYear();
     today = `${yyyy}-${mm}-${dd}`;
@@ -77,7 +77,7 @@ function NEO() {
         .then(response => response.json())
         .then(data => data["near_earth_objects"])
         .then(function(data) {
-            
+
             $(".neoInfo").remove() /*removes placeholder code */
 
             var numTdy = 4
@@ -200,10 +200,6 @@ function spaceyNews() {
         .then(response => response.text())
         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
         .then(function(data) {
-            if(data.querySelectorAll("channel").length==0){
-                console.log("a")
-                return;
-            }
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
             $("#newsLoad").css("display", "none")
@@ -258,7 +254,7 @@ function spaceyNews() {
                   }
                   var tit = items[i].querySelectorAll("title")[0].innerHTML
                   var imag = items[i].querySelectorAll("enclosure")[0].getAttribute('url')
-                  $("#newsEnt").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-9 col-md-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"`+`style = "color : #`+ (Number(`0x1${document.getElementById("colour").value.substring(1)}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase() +`"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-3 col-md-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`) 
+                  $("#news>p.desc").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-9 col-md-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-3 col-md-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`) 
 
             }
             var pubDate = channel.querySelectorAll("pubDate")[0].innerHTML
