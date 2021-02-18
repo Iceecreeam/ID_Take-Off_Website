@@ -106,8 +106,8 @@ A rocket would appear occasionally and either stay at the top of the screen or e
     1. A lot of the issues had to do with how dynamically applied styling would not work on dynamically created elements (fadein, fadeout, popover, etc.). Most of the time adding the styling at the same time as creating the elements helped.
     2. Downloaded and locally stored JSONs didnt work for lottie after restarting my laptop and externakky linking to lottie files was the solution.
     3. There were many bugs that had to do with the appearing rocket, especially with how some rockets would suddenly accelerate/deccelerate despite the fixed intervals/distance. At the moment, it adds to the stylistic quality of the rocket.
-    4. The stars on the loading lottie animation for something cool do not load/take a long time to load sometimes (especially on mobile), leaving only the rocket and the planet there
-
+    4. The stars on the loading lottie animation for something cool do not load/take a long time to load sometimes (especially on mobile), leaving only the rocket and the planet there.
+    5. On screens thinner than 767px, the container $(".path") of the rocket convers some element that is hyperlinked to herokuapp (proxy). Users can still access the hyperlinked element but only its left side. Making z-index high would cause rocket to pass below the hyperlinked element which does not look correct.
 
 ## Credits
 
