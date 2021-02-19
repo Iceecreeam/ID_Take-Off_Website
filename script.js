@@ -2,7 +2,9 @@
 lsCheck();
 
 function lsCheck() {
+    /*check for rocket count and main theme colour*/
     var rocount = localStorage.getItem("rocount");
+    /*create values if they dont exist*/
     if (rocount == null) {
         rocount = 0;
     }
@@ -23,6 +25,7 @@ function lsCheck() {
 picOfDay();
 
 function picOfDay() {
+    /*fetch api*/
     fetch("https://api.nasa.gov/planetary/apod?api_key=0kDrOBtIYM2fhZoVrtf80AaSIzg4Tb7PPSeJ1bfu")
         .then(response => response.json())
         .then(data => data)
@@ -38,10 +41,12 @@ function picOfDay() {
                 $("#media").append('<br>It seems like this media type is unsupported.')
             }
 
+            /*insert data*/
             $(".imgTit>b").text(data["title"])
             $("#explain").text(data["explanation"])
             $("#photoDay>h4>#date").text(data["date"])
 
+            /*if copyright is applicable insert it*/
             if (data["copyright"] != null) {
                 var copyright = data["copyright"]
                 if (data["copyright"].includes("ESO Text:")) {
@@ -58,6 +63,7 @@ function picOfDay() {
 NEO()
 
 function NEO() {
+    /*get today and tomorrow's date*/
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0') //chunk of code taken and edited from stackoverflow
     var mm = String(today.getMonth() + 1).padStart(2, '0')
@@ -72,7 +78,7 @@ function NEO() {
     var startDate = today
     var endDate = tmr
 
-
+    /*fetch api*/
     fetch("https://api.nasa.gov/neo/rest/v1/feed?start_date=" + startDate + "&end_date=" + endDate + "&api_key=0kDrOBtIYM2fhZoVrtf80AaSIzg4Tb7PPSeJ1bfu")
         .then(response => response.json())
         .then(data => data["near_earth_objects"])
@@ -80,6 +86,7 @@ function NEO() {
 
             $(".neoInfo").remove() /*removes placeholder code */
 
+            /*calculate number of NEOs from each day to display*/
             var numTdy = 4
             var numTmr = 4
 
@@ -97,6 +104,7 @@ function NEO() {
 
             /*today loop*/
             for (var i = 0; i < numTdy; i++) {
+                /*get data*/
                 var datstr = (data[startDate][i]["close_approach_data"][0]["close_approach_date_full"] + ":00").split(/[- :]/)
                 dayTime = new Date("1990", '1', '1', datstr[3], datstr[4], datstr[5])
                 var time = dayTime.toLocaleTimeString('en-US', {
@@ -110,6 +118,7 @@ function NEO() {
                 var name = data[startDate][i]["name"].substring(data[startDate][i]["name"].indexOf("(") + 1, data[startDate][i]["name"].indexOf(")"))
                 var diamin = parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
                 var diamax = parseFloat(data[startDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_max"])
+                /*format values*/
                 var dia = ((diamax + diamin) / 2)
                 if (dia < 1) {
                     dia = dia.toFixed(2).toString().substring(1)
@@ -134,12 +143,14 @@ function NEO() {
                 } else {
                     dis = parseFloat(dis).toFixed(0)
                 }
+                /*create html string*/
                 addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Today, ' + dayTime + ' SG</h4> <a href="' + link + '" target="_blank" class="neoName" style="color: #' + (Number(`0x1${document.getElementById("colour").value.substring(1)}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase() + '"><b>' + name + '</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>' + dia + '</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>' + vel + '</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>' + dis + '</b> Mkm<p> </div> </div> </div>'
 
             }
 
             /*tomorrow loop*/
             for (var i = 0; i < numTmr; i++) {
+                /*get data*/
                 var datstr = (data[endDate][i]["close_approach_data"][0]["close_approach_date_full"] + ":00").split(/[- :]/)
                 dayTime = new Date("1990", '1', '1', datstr[3], datstr[4], datstr[5])
                 var time = dayTime.toLocaleTimeString('en-US', {
@@ -154,6 +165,7 @@ function NEO() {
                 var diamin = parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_min"])
                 var diamax = parseFloat(data[endDate][i]["estimated_diameter"]["kilometers"]["estimated_diameter_max"])
                 var dia = ((diamax + diamin) / 2)
+                /*format values*/
                 if (dia < 1) {
                     dia = dia.toFixed(2).toString().substring(1)
                 } else if (parseFloat(dia) >= 1 && parseFloat(dia) < 10) {
@@ -177,11 +189,13 @@ function NEO() {
                 } else {
                     dis = parseFloat(dis).toFixed(0)
                 }
+                /*create html string*/
                 addString += '<div class="mb-2 px-3 d-flex justify-content-around text-left neoInfo"><div class="col-4 p-0 neoInfoLeft"><h4 class="neoDateTime">Tmrw, ' + dayTime + ' SG</h4> <a href="' + link + '" target="_blank" class="neoName" style="color: #' + (Number(`0x1${document.getElementById("colour").value.substring(1)}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase() + '"><b>' + name + '</b></a> </div> <div class="col-7 d-flex p-0 pt-0 neoInfoRight"> <div class="col-4 p-0"> <p class="my-2">Diameter</p> <p><b>' + dia + '</b> km<p> </div> <div class="col-4 p-0"> <p class="my-2">Velocity</p> <p><b>' + vel + '</b> km/s<p> </div> <div class="col-4 p-0"> <p class="my-2">Miss By</p> <p><b>' + dis + '</b> Mkm<p> </div> </div> </div>'
             }
-            $("#cometLoad").remove()
 
-            $("#neoEnt").append(addString)
+            $("#cometLoad").remove() /*remove loading animation*/
+
+            $("#neoEnt").append(addString) /*add NEOs to tile*/
         })
 
 
@@ -195,24 +209,32 @@ function spaceyNews() {
     const url = `${proxyUrl}https://www.space.com/feeds/all`;
     const request = new Request(url);
 
-    /*fetch news*/
+    /*fetch news RSS*/
     fetch(request)
         .then(response => response.text())
         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
         .then(function(data) {
+            
             if(data.querySelectorAll("channel").length==0){
                 return;
             }
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
+
+            /*remove error/loading screen*/
             $("#newsLoad").css("display", "none")
             $("#cors").css("display", "none")
 
+            /*loop through every article*/
             for (var i = 0; i<22; i++){
+                  /*get data*/
                   var link = items[i].querySelectorAll("guid")[0].innerHTML
                   var shortDesc = items[i].querySelectorAll("description")[0].innerHTML.replaceAll('"', "'");
-                  var timePos = items[i].querySelectorAll("pubDate")[0].innerHTML
+                  var timePos = items[i].querySelectorAll("pubDate")[0].innerHTML                  
+                  var tit = items[i].querySelectorAll("title")[0].innerHTML
+                  var imag = items[i].querySelectorAll("enclosure")[0].getAttribute('url')
                   
+                  /*format _____ days/hours ago*/
                   var timePos1 = timePos.split(",")
                   var newDate = new Date(timePos1[1])
                   var currentDate = new Date()
@@ -253,38 +275,42 @@ function spaceyNews() {
                         }
                   }
                   else{
-                        timePos = "ERROR"
+                        timePos = "error displaying time"
                   }
-                  var tit = items[i].querySelectorAll("title")[0].innerHTML
-                  var imag = items[i].querySelectorAll("enclosure")[0].getAttribute('url')
+
                   $("#newsEnt").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-9 col-md-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-3 col-md-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`) 
 
             }
+            /*get publication/last updated date*/
             var pubDate = channel.querySelectorAll("pubDate")[0].innerHTML
             var pubDate1 = pubDate.split(",")
             var newDate = new Date(pubDate1[1])
             var newDate1 = newDate.toLocaleString();
             $("#newsEnt").append(`<p class="mt-3 UpD">Last updated <b>| <span>` + newDate1 + `</span></b></p>`)
-
-
         })
 }
 
 /*something cool*/
 function sthCool() {
+    /*insert default loading screen and words*/
     $(".card-img-top").html(`<lottie-player class="d-inline w-75" src="https://assets5.lottiefiles.com/packages/lf20_XWP6mV.json" mode="bounce" background="transparent"  speed="5.8"  loop  autoplay></lottie-player>`)
     $(".card-title").text("The planetary soup is stirring")
     $(".card-text").text("What shall bubble to the surface?")
+
+    /*get user input*/
     var keyword = $(".coolKey")[0].value
+    /*ensure user does not enter blanks or only white spaces*/
     if (keyword == "" || !keyword.replace(/\s/g, '').length) {
         alert("Please enter a keyword!")
         return
     }
     var type = $(".dropdown-toggle").text()
+    /*fetch api*/
     fetch("https://images-api.nasa.gov/search?q=" + keyword)
         .then(response => response.json())
         .then(data => data["collection"]["items"])
         .then(function(data) {
+            /*append all results*/
             var items = []
             data.forEach(i => {
                 var item = i["data"][0]
@@ -301,23 +327,31 @@ function sthCool() {
 
             })
 
+            /*if there are no search results*/
             if (items.length <= 0 || data.length == 0) {
                 $(".card-img-top").html(`<lottie-player src="https://assets10.lottiefiles.com/temp/lf20_dzWAyu.json"  background="transparent"  speed="0.5"  style="width: 100%"  loop  autoplay></lottie-player>`)
                 $(".card-title").text("You have angered the cosmos")
                 $(".card-text").text("It demands a query clearer than its brightest star, and broader than itself")
-            } else {
+            } 
+            /*if there are search results*/
+            else {
+                /*select random search result*/
                 enNo = Math.floor(Math.random() * items.length)
+
+                /*get values*/
                 var item = items[enNo]
                 var tit = item["title"]
                 var cap = item["description"]
                 $(".card-title").text(tit)
                 $(".card-text").text(cap)
 
-                var href = item["href"]
+                var href = item["href"] /*hyperlink of image/audio*/
+                /*fetch hyperlinked*/
                 fetch(href)
                     .then(response => response.json())
                     .then(data => data)
                     .then(function(data) {
+                        /*pick the ideal format depeneding on media type*/
                         for (var i = 0; i < data.length; i++) {
 
                             if (data[i].substr(data[i].length - 3) == "jpg" || data[i].substr(data[i].length - 3) == "png") {
@@ -354,6 +388,7 @@ $(document).on("click", ".dropMed", function() {
 initRocket()
 
 function initRocket() {
+    /*set random time between around 2 and 15 minutes before rocket launches again*/
     var inter = (Math.random() * 1000000) + 120000
     if (inter > 1000000) {
     }
@@ -365,9 +400,10 @@ function initRocket() {
 
 /*move rocket*/
 function rockMove() {
+    /*Add rocket at bottom*/
     $(".path").html(`<lottie-player style="width:100%;margin-top:95vh;height: 110px;" id="rockLoad" src="https://assets10.lottiefiles.com/packages/lf20_nmdhzkop.json"  background="transparent"  speed="0.5"  loop  autoplay></lottie-player>`)
 
-
+    /*rocket will stop at the top of the screen*/
     if (Math.random() < 0.2) {
         var moveRock = setInterval(function() {
             if ($("#rockLoad").length > 0) {
@@ -378,7 +414,9 @@ function rockMove() {
                 }
             }
         }, 0.5);
-    } else {
+    } 
+    /*rocket will keep going beyond the top of the screen*/
+    else {
         var moveRock = setInterval(function() {
             if ($("#rockLoad").length > 0) {
                 $("#rockLoad").css("margin-top", parseFloat($("#rockLoad").css("margin-top").substr(0, $("#rockLoad").css("margin-top").length - 2)) - 1)
@@ -395,10 +433,11 @@ function rockMove() {
 
 /*if user clicks on rocket*/
 $(document).on("click", "#rockLoad", function() {
-
+    /*star animation*/
     $(".path").html(`<lottie-player src="https://assets5.lottiefiles.com/packages/lf20_MVp95j.json"  background="transparent"  speed="1"  style="width:100%;height: 180px;" autoplay></lottie-player>`)
-    localStorage.rocount = parseInt(localStorage.rocount) + 1
+    localStorage.rocount = parseInt(localStorage.rocount) + 1 /*increase rocket  count in localstorage*/
 
+    /*remove star animation and display user's rocket count in the main colour with stroke in the inverted colour*/
     var mainco = document.getElementById("colour").value.substring(1);
     var invco = (Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()
     var waitstar = setInterval(function() {
@@ -417,14 +456,14 @@ $(document).on("click", "#rockLoad", function() {
 
 
 /*Modify popover settings*/
-$(document).on("mouseenter", ".art", function() {
+$(document).on("mouseenter", ".art", function() { /*mouse is over article*/
     $('[data-toggle="popover"]').popover({
-        placement: 'left',
+        placement: 'left', /*popover appears on the left of the article*/
     });
-    $(this).popover('show');
+    $(this).popover('show'); /*show popover*/
 });
-$(document).on("mouseleave", ".art", function() {
-    $(this).popover('hide');
+$(document).on("mouseleave", ".art", function() { /*mouse leaves article*/
+    $(this).popover('hide'); /*hide popover*/
 });
 
 
@@ -435,11 +474,14 @@ $(document).on("click", ".art", function() {
 
 
 function changecolour() {
+    /*get main colour*/
     var mainco = document.getElementById("colour").value.substring(1);
     localStorage.mainco = mainco
     document.body.style.backgroundColor = '#' + mainco
+    /*get inverted colour https://stackoverflow.com/a/54569758*/
     var invco = (Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()
 
+    /*apply colours to webpage*/
     $(".tile,.dropdown-toggle").css("border", "solid #" + invco)
     $(".card-img-top").css("background-color", '#' + mainco)
     $(".path").css("color", '#' + mainco)
@@ -452,11 +494,7 @@ function changecolour() {
     $(".dropdown-toggle").css("border-top", "none")
 
 
-
-    r = parseFloat(mainco.substr(0, 2));
-    g = parseFloat(mainco.substr(2, 2));
-    b = parseFloat(mainco.substr(4, 2));
-
+    /*count number of Fs in hex abd determine colour of logos based on brightness of hex*/
     var count = 0
     for (var i = 0; i < mainco.length; i++) {
         if (mainco[i].match(/[a-z]/i)) {
@@ -471,6 +509,7 @@ function changecolour() {
     }
 }
 
+/*when user chn=anged colour on colour picker change colour of website*/
 $("#colour").on("input", function() {
     changecolour()
 });
