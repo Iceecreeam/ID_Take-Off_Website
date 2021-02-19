@@ -343,7 +343,8 @@ function sthCool() {
                 var tit = item["title"]
                 var cap = item["description"]
                 $(".card-title").text(tit)
-                $(".card-text").text(cap)
+                $(".card-text").text("") /*blank description in case there isnt one*/
+                $(".card-text").text(cap) /*actual description*/
 
                 var href = item["href"] /*hyperlink of image/audio*/
                 /*fetch hyperlinked*/
