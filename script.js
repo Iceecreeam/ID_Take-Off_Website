@@ -200,6 +200,10 @@ function spaceyNews() {
         .then(response => response.text())
         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
         .then(function(data) {
+            if(data.querySelectorAll("channel").length==0){
+                console.log("a")
+                return;
+            }
             var channel = data.querySelectorAll("channel")[0]
             var items = channel.querySelectorAll("item")
             $("#newsLoad").css("display", "none")
@@ -254,7 +258,7 @@ function spaceyNews() {
                   }
                   var tit = items[i].querySelectorAll("title")[0].innerHTML
                   var imag = items[i].querySelectorAll("enclosure")[0].getAttribute('url')
-                  $("#news>p.desc").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-9 col-md-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-3 col-md-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`) 
+                  $("#newsEnt").append(` <button onclick="window.open('`+link+`','_blank');" data-toggle="popover" data-placement="bottom" data-content="`+shortDesc+`" type="button" class="col-11 mx-auto btn p-0 mt-4 d-flex flex-nowrap justify-content-between border-0 rounded text-left bg-transparent art"> <span class="col-9 col-md-8 p-0 pl-3 headline"> <span class="col-12 d-block ml-4 mb-2 artim"> <b> `+timePos+` </b></span> <span class="col-12 p-0 tit">`+tit+`</span> </span> <span class="col-3 col-md-4 d-flex p-0 justify-content-center"><img src="`+imag+`" alt="photo"></span> </button>`) 
 
             }
             var pubDate = channel.querySelectorAll("pubDate")[0].innerHTML
