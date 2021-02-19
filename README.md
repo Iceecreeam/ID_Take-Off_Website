@@ -113,12 +113,12 @@ A rocket would appear occasionally and either stay at the top of the screen or e
 
 ### Content
 - All regex was done with the help of [regex101](https://regex101.com/)
+- Code referenced from (https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript)
 - [This](https://stackoverflow.com/a/54569758) was the reference for any instance of:
 ```ruby
 /*inverts hex (variable mainco)*/
 Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase() 
 ```
-Code referenced from (https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript)
 
 
 ### API/RSS
