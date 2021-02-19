@@ -118,6 +118,8 @@ A rocket would appear occasionally and either stay at the top of the screen or e
 /*inverts hex (variable mainco)*/
 Number(`0x1${mainco}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase() 
 ```
+Code referenced from (https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript)
+
 
 ### API/RSS
 - [APOD](https://github.com/nasa/apod-api) | Interesting media, updated daily
