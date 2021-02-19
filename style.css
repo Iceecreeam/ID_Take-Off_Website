@@ -132,7 +132,7 @@ input[type="color" i] {
 }
 
 
-
+/*Screens 1060px and below*/
 @media only screen and (max-width: 1060px) {
 	body {
 		font-size: 1.4vw;
@@ -163,6 +163,7 @@ input[type="color" i] {
 
 }
 
+/*Screens 768px and below*/
 @media only screen and (max-width: 768PX) {
 	/*default css*/
 	body{
@@ -232,6 +233,7 @@ input[type="color" i] {
 	}
 }
 
+/*Screens 420px and below*/
 @media only screen and (max-width: 420px) {
 	div.col-4.p-0>p.my-2{
 		font-size: 3.5vw;
@@ -244,6 +246,7 @@ input[type="color" i] {
 	}
 }
 
+/*Screens 325px and below*/
 @media only screen and (max-width: 325px) {
 	body {
 		font-size: 3.6vw;
