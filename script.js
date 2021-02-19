@@ -65,7 +65,7 @@ NEO()
 function NEO() {
     /*get today and tomorrow's date*/
     var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0') //chunk of code taken and edited from stackoverflow
+    var dd = String(today.getDate()).padStart(2, '0') //chunk of code taken and edited from stackoverflow https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript
     var mm = String(today.getMonth() + 1).padStart(2, '0')
     var yyyy = today.getFullYear();
     today = `${yyyy}-${mm}-${dd}`;
