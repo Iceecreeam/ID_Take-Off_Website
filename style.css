@@ -1,3 +1,5 @@
+
+/*default css*/
 body{
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 1.1vw;
@@ -6,18 +8,13 @@ body{
 	margin: 0;
 }
 
-.titleLogo{
-    filter: invert(100%);
-}
-
-
 /*remove focus outline*/
 button:focus, .btn:focus, textarea:focus, select:focus, audio:focus, .coolKey:focus{
 	outline: none;
 	border: 0;
 	color: #000000;
 	box-shadow: none;
-    filter: invert(40%);
+    filter: invert(20%);
 }
 
 
@@ -39,11 +36,10 @@ h6{
 	line-height: 3.8vw
 }
 
+/*add padding and margin for tile dessc*/
 p.desc{
 	padding-bottom: 1.5vh;
 	margin-bottom: 2vh;
-	
-
 }
 
 .imgTit, .card-title{
@@ -168,6 +164,7 @@ input[type="color" i] {
 }
 
 @media only screen and (max-width: 768PX) {
+	/*default css*/
 	body{
 		font-size: 3vw;
 		line-height: 4.5vw;

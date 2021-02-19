@@ -27,6 +27,7 @@
       <!-- Header -->
       <img src="media/titlelogo.svg" class="col-12 col-md-8 d-block mx-auto mt-2 mb-3 titleLogo" id = "titleLogo" alt="titleLogo">
 
+      <!-- div containing all the tiles -->
       <div class="col-12 d-flex flex-wrap justify-content-around">
 
          <!-- left column -->
@@ -46,7 +47,9 @@
             <!-- NEOs -->
             <div class="p-1 p-md-3 py-4 text-center justify-content-center tile" id="neo">
                <h1 class="tiletit">In Earth's Proximity</h1>
-               <p class="desc">Here are the upcoming near-Earth objects (NEO)</p>  
+               <p class="desc">Here are the upcoming near-Earth objects (NEO)</p>
+               
+               <!-- div that NEOs are inserted in -->
                <div id="neoEnt" class="p-0 col-12"></div>
                <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_pwbkquxw.json"  background="transparent" id="cometLoad"  speed="1"  style="width: 100%;"  loop autoplay></lottie-player>           
             </div>
@@ -57,6 +60,7 @@
                <h1 class="tiletit">Something Cool?</h1>
                <p class="col-12 desc">Take a gander at our cool astronomy-related randomiser</p>
                
+               <!-- Input for cool thing -->              
                <div class="col-10 mb-4 p-0 input-group">
                   <input type="text" onfocus="this.value=''" class="form-control coolKey" placeholder="Enter a keyword!" aria-label="Text input with dropdown button">
                   <div class="input-group-append">
@@ -69,12 +73,15 @@
                   </div>
                </div>
 
+               <!-- Randomely generated cool thing & its information -->
                <div class="col-10 p-1 p-md-2 justify-content-center card" style="width: 18rem;">
+                  <!-- Card for cool thing & its information -->
                   <div class="p-1 card-body">
+                     <!-- Cool image/audio -->
                      <div class="p-2 justify-content-center card-img-top">
-                        
                         <lottie-player class="d-inline w-75" src="https://assets5.lottiefiles.com/packages/lf20_XWP6mV.json" mode="bounce" background="transparent"  speed="5.8"  loop  autoplay></lottie-player>
                      </div>
+                    <!-- Other information about cool thing -->
                     <h5 class="my-3 card-title">The planetary soup is stirring</h5>
                     <p class="card-text">What shall bubble to the surface?</p>
                   </div>
@@ -90,18 +97,18 @@
             <h1 class="tiletit">Spacey News</h1>
             <p class="desc">The latest happenings from the æthers</p>
             
+            <!-- div that news is inserted in -->
             <div id="newsEnt" class="col-12 p-0"></div>
             <lottie-player style="height:300px;" id="newsLoad" src="https://assets4.lottiefiles.com/packages/lf20_kw2yp643.json"  background="transparent"  speed="0.5"  loop  autoplay></lottie-player>
             <a id="cors" target="_blank" href="https://cors-anywhere.herokuapp.com/corsdemo">News not appearing? Click here to request access and reload.</a>
-            
          </div>
       </div>
        
-      <!-- Rocket -->
+      <!-- path for rocket to travel through -->
       <div class="text-center path"></div>
 
 
-      <!--colour picker-->
+      <!-- colour picker for theme -->
       <div class="colour">
          <input type="color" id="colour" value="#ff0000">
       </div>
