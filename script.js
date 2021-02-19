@@ -201,7 +201,6 @@ function spaceyNews() {
         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
         .then(function(data) {
             if(data.querySelectorAll("channel").length==0){
-                console.log("a")
                 return;
             }
             var channel = data.querySelectorAll("channel")[0]
